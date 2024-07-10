@@ -1,2 +1,3 @@
 # TeamFPS
-## 아이디어
+## 주제
+### Sell Gallary
