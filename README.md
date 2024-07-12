@@ -28,4 +28,6 @@
     평일 2번 및 비정기적 회의
     매주 화 금 오전 10시
 ## 사용언어
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=HyunBeen0903)](https://github.com/anuraghazra/github-readme-stats)
+https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
+https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white
+
