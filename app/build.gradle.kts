@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
+    // Add the Google services Gradle plugin
+    id("com.google.gms.google-services")
     alias(libs.plugins.jetbrainsKotlinAndroid)
 }
 
@@ -57,6 +59,12 @@ dependencies {
     implementation("com.airbnb.android:lottie:3.1.0")
 
     implementation("androidx.core:core-splashscreen:1.0.1") //Splash
+    // Import the Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+    // TODO: Add the dependencies for Firebase products you want to use
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation("com.google.firebase:firebase-analytics")
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
