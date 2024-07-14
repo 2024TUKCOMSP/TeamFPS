@@ -1,8 +1,9 @@
 package com.example.myapplication.data
 
 data class Users(
-    var id: String? = "",
+    var uid: String? = "",
     var name: String? = "",
     var email: String? = "",
-    var profilePictureUrl: String? = ""
+    var profilePictureUrl: String? = "",
+    var authprovider: String? =""
 )
