@@ -59,10 +59,11 @@ dependencies {
     implementation("com.airbnb.android:lottie:3.1.0")
 
     implementation("androidx.core:core-splashscreen:1.0.1") //Splash
-    // Import the Firebase BoM
-    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
-    // TODO: Add the dependencies for Firebase products you want to use
-    // When using the BoM, don't specify versions in Firebase dependencies
+
+    //firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2")) //Firebase BoM
+    implementation("com.google.firebase:firebase-auth-ktx")             //Authentication library
+    implementation("com.google.android.gms:play-services-auth:20.7.0")  //google Play Service Library
     implementation("com.google.firebase:firebase-analytics")
 
 

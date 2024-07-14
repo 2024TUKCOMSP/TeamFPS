@@ -9,6 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.myapplication.databinding.ActivityLoginBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.navercorp.nid.NaverIdLoginSDK
 import com.navercorp.nid.NaverIdLoginSDK.oauthLoginCallback
 import com.navercorp.nid.oauth.NidOAuthLogin
@@ -16,11 +20,22 @@ import com.navercorp.nid.oauth.OAuthLoginCallback
 
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
+//    private lateinit var auth: FirebaseAuth //인증 선언
+//    private lateinit var googleSignInClient: GoogleSignInClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        enableEdgeToEdge()
         setContentView(binding.root)
+
+//        auth = FirebaseAuth.getInstance()
+
+//        //구글 로그인 구성
+//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//            .requestIdToken(getString(R.string.default_web_client_id))
+//            .requestEmail()
+//            .build()
+//        googleSignInClient = GoogleSignIn.getClient(this,gso)
 
         //네아로 객체 초기화
         NaverIdLoginSDK.initialize(this, getString(R.string.naver_client_id),
