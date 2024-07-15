@@ -58,6 +58,8 @@ dependencies {
 
     implementation("androidx.core:core-splashscreen:1.0.1") //Splash
 
+    implementation ("com.kakao.sdk:v2-user:2.20.3") // 카카오 로그인 API 모듈
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
