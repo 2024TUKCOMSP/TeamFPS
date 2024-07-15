@@ -1,5 +1,6 @@
 package com.example.myapplication.gallary
 
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.os.Bundle
@@ -11,6 +12,9 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.myapplication.R
+import com.example.myapplication.gallary.PaintView.Companion.colorList
+import com.example.myapplication.gallary.PaintView.Companion.currentBrush
+import com.example.myapplication.gallary.PaintView.Companion.pathList
 
 class GallaryFragment : Fragment() {
 
@@ -44,17 +48,29 @@ class GallaryFragment : Fragment() {
         val eraser = view.findViewById<ImageButton>(R.id.whiteColor)
 
         redBtn.setOnClickListener{
+            paintBrush.color = Color.RED
+            currentColor(paintBrush.color)
 
         }
         blueBtn.setOnClickListener{
+            paintBrush.color = Color.BLUE
+            currentColor(paintBrush.color)
 
         }
         blackBtn.setOnClickListener{
+            paintBrush.color = Color.BLACK
+            currentColor(paintBrush.color)
 
         }
         eraser.setOnClickListener{
-
+            pathList.clear()
+            colorList.clear()
+            path.reset()
         }
+    }
+    private fun currentColor(color: Int){
+        currentBrush = color
+        path = Path()
     }
 
 }
