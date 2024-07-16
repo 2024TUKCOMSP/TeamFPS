@@ -8,101 +8,120 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="#FFFFFFFF"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <ImageView
-            android:layout_width="130dp"
-            android:layout_height="match_parent" />
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/profile_image"
+            android:src="@drawable/kakao_login_medium_narrow"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Name"
+            android:id="@+id/name_text"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:textSize="30dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FF0000FF"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textSize="20sp"
-                android:text="보유마일리지"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textSize="20sp"
-                android:text="10000냥"
-                />
-        </LinearLayout>
-
-
-    </LinearLayout>
-    <ScrollView
-        android:fillViewport="true"
-        android:scrollbars="none"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:id="@+id/drawlayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical"
-            >
-
-            <LinearLayout
+            android:layout_marginLeft="10dp">
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="#FFFF0000"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    >
-                    <ImageView
-                        android:layout_width="260dp"
-                        android:layout_height="260dp"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"/>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    >
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="가격: "/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="3000냥"/>
-
-                    </LinearLayout>
-                    <Button
-                        android:id="@+id/buy_painting"
-                        android:text = "안녕"
-                        android:layout_marginTop="200dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-            </LinearLayout>
-
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="보유 마일리지" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:text="10000"
+                android:layout_marginTop="5dp"/>
         </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/painting_list"/>
+    </LinearLayout>
+<!--    <ScrollView-->
+<!--        android:fillViewport="true"-->
+<!--        android:scrollbars="none"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+<!--        <LinearLayout-->
+<!--            android:id="@+id/drawlayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical"-->
+<!--            >-->
 
-    </ScrollView>
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="300dp"-->
+<!--                android:background="#FFFF0000"-->
+<!--                android:orientation="horizontal">-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:orientation="vertical"-->
+<!--                    >-->
+<!--                    <ImageView-->
+<!--                        android:layout_width="260dp"-->
+<!--                        android:layout_height="260dp"/>-->
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"/>-->
+
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:gravity="center"-->
+<!--                    >-->
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="horizontal">-->
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:text="가격: "/>-->
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:text="3000냥"/>-->
+
+<!--                    </LinearLayout>-->
+<!--                    <Button-->
+<!--                        android:id="@+id/buy_painting"-->
+<!--                        android:text = "안녕"-->
+<!--                        android:layout_marginTop="200dp"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"/>-->
+<!--                </LinearLayout>-->
+<!--            </LinearLayout>-->
+
+<!--        </LinearLayout>-->
+
+<!--    </ScrollView>-->
 
 
 </LinearLayout>
