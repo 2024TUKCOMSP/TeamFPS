@@ -1,25 +1,45 @@
 package com.example.myapplication
 
 import android.content.ContentValues.TAG
+import android.content.Intent
+import android.credentials.GetCredentialException
+import android.credentials.GetCredentialRequest
+import android.credentials.GetCredentialResponse
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.credentials.CustomCredential
+import androidx.credentials.PasswordCredential
+import androidx.credentials.PublicKeyCredential
 import com.example.myapplication.databinding.ActivityLoginBinding
+import com.google.android.gms.auth.api.identity.BeginSignInRequest
+import com.google.android.gms.auth.api.identity.Identity
+import com.google.android.gms.auth.api.identity.SignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
-import com.navercorp.nid.NaverIdLoginSDK.oauthLoginCallback
 import com.navercorp.nid.oauth.NidOAuthLogin
 import com.navercorp.nid.oauth.OAuthLoginCallback
 
+
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -33,6 +53,7 @@ class LoginActivity : AppCompatActivity() {
         val oauthLoginCallback = object : OAuthLoginCallback {
             override fun onSuccess() {
                 // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
+                Log.d("naver", "login")
 //                binding.tvAccessToken.text = NaverIdLoginSDK.getAccessToken()
 //                binding.tvRefreshToken.text = NaverIdLoginSDK.getRefreshToken()
 //                binding.tvExpires.text = NaverIdLoginSDK.getExpiresAt().toString()
@@ -60,6 +81,7 @@ class LoginActivity : AppCompatActivity() {
         binding.naverDelete.setOnClickListener {
             NidOAuthLogin().callDeleteTokenApi(object : OAuthLoginCallback {
                 override fun onSuccess() {
+                    Log.d("naver", "delete")
                     //서버에서 토큰 삭제에 성공한 상태입니다.
                 }
                 override fun onFailure(httpStatus: Int, message: String) {
@@ -82,6 +104,7 @@ class LoginActivity : AppCompatActivity() {
                 if (error != null) {
                     Log.e(TAG, "카카오계정으로 로그인 실패", error)
                 } else if (token != null) {
+                    Log.d("kakao", "login")
                     Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
                 }
             }
@@ -101,6 +124,7 @@ class LoginActivity : AppCompatActivity() {
                         // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
                         UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
                     } else if (token != null) {
+                        Log.d("kakao", "login")
                         Log.i(TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
                     }
                 }
@@ -112,9 +136,11 @@ class LoginActivity : AppCompatActivity() {
         binding.kakaoLogout.setOnClickListener {
             UserApiClient.instance.logout { error ->
                 if (error != null) {
+                    Log.d("kakao", "logout fail")
                     Log.e(TAG, "로그아웃 실패. SDK에서 토큰 삭제됨", error)
                 }
                 else {
+                    Log.d("kakao", "logout success")
                     Log.i(TAG, "로그아웃 성공. SDK에서 토큰 삭제됨")
                 }
             }
@@ -123,12 +149,70 @@ class LoginActivity : AppCompatActivity() {
         binding.kakaoDelete.setOnClickListener {
             UserApiClient.instance.unlink { error ->
                 if (error != null) {
+                    Log.d("kakao", "delete fail")
                     Log.e(TAG, "연결 끊기 실패", error)
                 }
                 else {
+                    Log.d("kakao", "delete success")
                     Log.i(TAG, "연결 끊기 성공. SDK에서 토큰 삭제 됨")
                 }
             }
         }
+
+        auth = FirebaseAuth.getInstance()
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.web_client_id))
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+        binding.googleLogin.setOnClickListener {
+            signIn()
+        }
+
+        binding.googleLogout.setOnClickListener {
+            auth.signOut()
+            googleSignInClient.signOut().addOnCompleteListener(this) {
+                // 로그아웃이 완료되면 추가 작업 (예: 로그인 화면으로 이동)
+            }
+        }
+    }
+
+    private fun signIn() {
+        val signInIntent = googleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)!!
+                firebaseAuthWithGoogle(account.idToken!!)
+            } catch (e: ApiException) {
+                // 로그 실패 처리
+            }
+        }
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    // 로그인 성공 처리
+                    Log.d("ggoog", "login")
+                } else {
+                    // 로그인 실패 처리
+                }
+            }
+    }
+
+    companion object {
+        private const val RC_SIGN_IN = 9001
     }
 }
