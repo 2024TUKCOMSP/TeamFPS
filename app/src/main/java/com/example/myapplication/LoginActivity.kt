@@ -33,6 +33,7 @@ import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
 import com.navercorp.nid.oauth.NidOAuthLogin
 import com.navercorp.nid.oauth.OAuthLoginCallback
+import com.kakao.sdk.common.util.Utility
 
 
 class LoginActivity : AppCompatActivity() {
@@ -45,6 +46,9 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
+
+        var keyHash = Utility.getKeyHash(this)
+        Log.d("keyHash", keyHash)
 
         //네아로 객체 초기화
         NaverIdLoginSDK.initialize(this, getString(R.string.naver_client_id),
