@@ -1,60 +1,58 @@
 package com.example.myapplication.home
 
 import android.os.Bundle
+import android.text.Layout
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.example.myapplication.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        var plusbutton = view.findViewById<Button>(R.id.buy_painting)
+        var container = requireContext()
+        plusbutton.setOnClickListener{
+            addLayout() //미완 파베 등록되거나 삭제 되면 완성본이 올라갔으면 좋겠음
+        }
+
     }
+    private fun addLayout()
+    {
+        var pluslayout = view?.findViewById<LinearLayout>(R.id.drawlayout)
+        val newLayout = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.HORIZONTAL
+        }
+
+        // 새 레이아웃에 위젯 추가
+        val label = TextView(requireContext()).apply {
+            text = "New Label:"
+        }
+        val editText = EditText(requireContext())
+        val button = Button(requireContext()).apply {
+            text = "New Button"
+        }
+
+        newLayout.addView(label)
+        newLayout.addView(editText)
+        newLayout.addView(button)
+
+        // 기존의 drawlayout에 새 레이아웃 추가
+        pluslayout?.addView(newLayout)
+    }
+
+
 }
