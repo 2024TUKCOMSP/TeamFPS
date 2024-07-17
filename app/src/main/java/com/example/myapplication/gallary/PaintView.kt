@@ -14,6 +14,7 @@ import com.example.myapplication.gallary.GallaryFragment.Companion.paintBrush
 import com.example.myapplication.gallary.GallaryFragment.Companion.path
 
 class PaintView : View {
+    //createView를 코트린 언어로 보여주는 방법
     constructor(context: Context) : this(context, null){
         init()
     }
@@ -68,6 +69,7 @@ class PaintView : View {
             canvas.drawPath(pathList[i], paintBrush)
             invalidate()
         }
+
     }
 
 }
