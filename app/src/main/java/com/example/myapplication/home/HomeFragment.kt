@@ -65,59 +65,25 @@ class HomeFragment : Fragment() {
             }
         })
     }
+}
 
-    class RecyclerHolder(val binding: RecyclerItemBinding): RecyclerView.ViewHolder(binding.root)
+class RecyclerHolder(val binding: RecyclerItemBinding): RecyclerView.ViewHolder(binding.root)
 
-    class ResultAdapter(val paintList: MutableList<Paints>):
-        RecyclerView.Adapter<RecyclerHolder>(){
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerHolder =
-            RecyclerHolder(RecyclerItemBinding.inflate(LayoutInflater.from(parent.context),
-                parent, false))
+class ResultAdapter(val paintList: MutableList<Paints>):
+    RecyclerView.Adapter<RecyclerHolder>(){
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerHolder =
+        RecyclerHolder(RecyclerItemBinding.inflate(LayoutInflater.from(parent.context),
+            parent, false))
 
-        override fun getItemCount(): Int = paintList.size
+    override fun getItemCount(): Int = paintList.size
 
-        override fun onBindViewHolder(holder: RecyclerHolder, position: Int) {
-            val currentPaint = paintList[position]
-            holder.binding.paintings.setImageDrawable(R.drawable.kakao_login_medium_narrow.toDrawable())
-            holder.apply {
-                binding.apply {
-                    textview.text = currentPaint.cost
-                }
+    override fun onBindViewHolder(holder: RecyclerHolder, position: Int) {
+        val currentPaint = paintList[position]
+        holder.binding.paintings.setImageDrawable(R.drawable.kakao_login_medium_narrow.toDrawable())
+        holder.apply {
+            binding.apply {
+                textview.text = currentPaint.cost
             }
         }
     }
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        var plusbutton = view.findViewById<Button>(R.id.buy_painting)
-//        var container = requireContext()
-//        plusbutton.setOnClickListener{
-//            addLayout() //미완 파베 등록되거나 삭제 되면 완성본이 올라갔으면 좋겠음
-//        }
-//
-//    }
-
-//    private fun addLayout()
-//    {
-//        var pluslayout = view?.findViewById<LinearLayout>(R.id.drawlayout)
-//        val newLayout = LinearLayout(requireContext()).apply {
-//            orientation = LinearLayout.HORIZONTAL
-//        }
-//
-//        // 새 레이아웃에 위젯 추가
-//        val label = TextView(requireContext()).apply {
-//            text = "New Label:"
-//        }
-//        val editText = EditText(requireContext())
-//        val button = Button(requireContext()).apply {
-//            text = "New Button"
-//        }
-//
-//        newLayout.addView(label)
-//        newLayout.addView(editText)
-//        newLayout.addView(button)
-//
-//        // 기존의 drawlayout에 새 레이아웃 추가
-//        pluslayout?.addView(newLayout)
-//    }
 }
