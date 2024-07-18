@@ -58,6 +58,8 @@ class LoginActivity : AppCompatActivity() {
             override fun onSuccess() {
                 // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
                 Log.d("naver", "login")
+                //로그인 시 토큰을 가지고 navi로 이동
+                moveActivity(NaverIdLoginSDK.getAccessToken())
 //                binding.tvAccessToken.text = NaverIdLoginSDK.getAccessToken()
 //                binding.tvRefreshToken.text = NaverIdLoginSDK.getRefreshToken()
 //                binding.tvExpires.text = NaverIdLoginSDK.getExpiresAt().toString()
@@ -110,6 +112,8 @@ class LoginActivity : AppCompatActivity() {
                 } else if (token != null) {
                     Log.d("kakao", "login")
                     Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
+                    //로그인 시 토큰을 가지고 navi로 이동
+                    moveActivity(token.accessToken)
                 }
             }
 
@@ -130,6 +134,8 @@ class LoginActivity : AppCompatActivity() {
                     } else if (token != null) {
                         Log.d("kakao", "login")
                         Log.i(TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
+                        //로그인 시 토큰을 가지고 navi로 이동
+                        moveActivity(token.accessToken)
                     }
                 }
             } else {
@@ -196,8 +202,10 @@ class LoginActivity : AppCompatActivity() {
             try {
                 val account = task.getResult(ApiException::class.java)!!
                 firebaseAuthWithGoogle(account.idToken!!)
+                Log.d("ggoog", "login")
             } catch (e: ApiException) {
                 // 로그 실패 처리
+                Log.e("ggoog", "Google sign in failed", e)
             }
         }
     }
@@ -209,11 +217,21 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     // 로그인 성공 처리
-                    Log.d("ggoog", "login")
+
+                    //로그인 시 토큰을 가지고 navi로 이동
+                    moveActivity(idToken)
                 } else {
                     // 로그인 실패 처리
                 }
             }
+    }
+
+    //토큰을 넘긴 채 Navi로 이동
+    private fun moveActivity(token: String?) {
+        val intent = Intent(this, NaviActivity::class.java)
+        intent.putExtra("TOKEN",token)
+        startActivity(intent)
+        finish()
     }
 
     companion object {

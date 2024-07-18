@@ -17,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler(Looper.getMainLooper()).postDelayed({   //일정 시간 이후 메인으로 이동
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(Intent(this, NaviActivity::class.java))
             finish()
         },1000) //1초 후 메인화면으로 이동
 
