@@ -25,9 +25,9 @@ class NaviActivity : AppCompatActivity() {
     lateinit var binding : ActivityNaviBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         binding = ActivityNaviBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val bottomNavigationView =findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val profileFragment = ProfileFragment()
         val homeFragment = HomeFragment()

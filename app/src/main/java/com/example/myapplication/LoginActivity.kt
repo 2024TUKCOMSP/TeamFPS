@@ -60,6 +60,7 @@ class LoginActivity : AppCompatActivity() {
                 Log.d("naver", "login")
                 //로그인 시 토큰을 가지고 navi로 이동
                 moveActivity(NaverIdLoginSDK.getAccessToken())
+
 //                binding.tvAccessToken.text = NaverIdLoginSDK.getAccessToken()
 //                binding.tvRefreshToken.text = NaverIdLoginSDK.getRefreshToken()
 //                binding.tvExpires.text = NaverIdLoginSDK.getExpiresAt().toString()
@@ -114,6 +115,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
                     //로그인 시 토큰을 가지고 navi로 이동
                     moveActivity(token.accessToken)
+
                 }
             }
 
@@ -136,6 +138,7 @@ class LoginActivity : AppCompatActivity() {
                         Log.i(TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
                         //로그인 시 토큰을 가지고 navi로 이동
                         moveActivity(token.accessToken)
+
                     }
                 }
             } else {
@@ -220,6 +223,9 @@ class LoginActivity : AppCompatActivity() {
 
                     //로그인 시 토큰을 가지고 navi로 이동
                     moveActivity(idToken)
+
+                    Log.d("ggoog", "login")
+
                 } else {
                     // 로그인 실패 처리
                 }
