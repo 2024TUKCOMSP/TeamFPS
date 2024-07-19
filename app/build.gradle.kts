@@ -85,6 +85,9 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:20.7.0")  //google Play Service Library
     implementation("com.google.firebase:firebase-analytics")
 
+    //picasso
+//    implementation("com.squareup.picasso:picasso:2.8")
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

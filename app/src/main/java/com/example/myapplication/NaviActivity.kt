@@ -17,7 +17,6 @@ class NaviActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_navi)
         val bottomNavigationView =findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val profileFragment = ProfileFragment()

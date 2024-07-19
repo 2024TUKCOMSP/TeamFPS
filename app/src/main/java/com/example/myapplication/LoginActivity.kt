@@ -58,6 +58,7 @@ class LoginActivity : AppCompatActivity() {
             override fun onSuccess() {
                 // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
                 Log.d("naver", "login")
+                startActivity(Intent(applicationContext, NaviActivity::class.java))
 //                binding.tvAccessToken.text = NaverIdLoginSDK.getAccessToken()
 //                binding.tvRefreshToken.text = NaverIdLoginSDK.getRefreshToken()
 //                binding.tvExpires.text = NaverIdLoginSDK.getExpiresAt().toString()
@@ -110,6 +111,7 @@ class LoginActivity : AppCompatActivity() {
                 } else if (token != null) {
                     Log.d("kakao", "login")
                     Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
+                    startActivity(Intent(this, NaviActivity::class.java))
                 }
             }
 
@@ -130,6 +132,7 @@ class LoginActivity : AppCompatActivity() {
                     } else if (token != null) {
                         Log.d("kakao", "login")
                         Log.i(TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
+                        startActivity(Intent(this, NaviActivity::class.java))
                     }
                 }
             } else {
@@ -210,6 +213,7 @@ class LoginActivity : AppCompatActivity() {
                     val user = auth.currentUser
                     // 로그인 성공 처리
                     Log.d("ggoog", "login")
+                    startActivity(Intent(this, NaviActivity::class.java))
                 } else {
                     // 로그인 실패 처리
                 }
