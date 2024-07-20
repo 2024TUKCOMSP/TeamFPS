@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
+import com.example.myapplication.NaviActivity
 import com.example.myapplication.R
 import com.example.myapplication.data.Paints
 import com.example.myapplication.gallary.PaintView.Companion.colorList
@@ -81,11 +82,14 @@ class GallaryFragment : Fragment() {
             ypathList.clear()
             path.reset()
         }
+        val token = (requireActivity() as? NaviActivity)?.getToken()
+        val uid = token.hashCode().toString()
+        //그림 저장하는 데베 코드
         paintend.setOnClickListener{
             val database = FirebaseDatabase.getInstance()
             val paintsRef = database.getReference("paint")
             val paintpid = database.getReference("pid")
-            val paint = Paints("333",null,500,null,null, xpathList, ypathList, colorList)
+            val paint = Paints("333",uid,"500",null,null, xpathList, ypathList, colorList)
             paintsRef.child(paint.pid!!).setValue(paint)
         }
 
