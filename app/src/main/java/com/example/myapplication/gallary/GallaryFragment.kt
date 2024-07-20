@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
@@ -16,6 +17,9 @@ import com.example.myapplication.R
 import com.example.myapplication.gallary.PaintView.Companion.colorList
 import com.example.myapplication.gallary.PaintView.Companion.currentBrush
 import com.example.myapplication.gallary.PaintView.Companion.pathList
+import com.example.myapplication.gallary.PaintView.Companion.xpathList
+import com.example.myapplication.gallary.PaintView.Companion.ypathList
+import com.google.firebase.database.FirebaseDatabase
 
 class GallaryFragment : Fragment() {
 
@@ -47,10 +51,13 @@ class GallaryFragment : Fragment() {
         val blueBtn = view.findViewById<ImageButton>(R.id.blueColor)
         val blackBtn = view.findViewById<ImageButton>(R.id.blackColor)
         val eraser = view.findViewById<ImageButton>(R.id.whiteColor)
+        val paintend = view.findViewById<Button>(R.id.paintendbutton)
 
         redBtn.setOnClickListener{
             paintBrush.color = Color.RED
             currentColor(paintBrush.color)
+            for(i in xpathList.indices)
+            Log.d("path", xpathList[i].toString())
 
         }
         blueBtn.setOnClickListener{
@@ -69,8 +76,16 @@ class GallaryFragment : Fragment() {
             }
             pathList.clear()
             colorList.clear()
+            xpathList.clear()
+            ypathList.clear()
             path.reset()
         }
+        paintend.setOnClickListener{
+            val database = FirebaseDatabase.getInstance()
+            val paintsRef = database.getReference("paint")
+
+        }
+
     }
     private fun currentColor(color: Int){
         currentBrush = color
