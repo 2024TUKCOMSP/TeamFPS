@@ -6,7 +6,7 @@ data class Paints(
     var cost: String? = "", //마일리지 가격
     var name: String? = "", //그림 이름
     var sell: Int? = 0,
-    var xPath: Array<Float>? = arrayOf(),
-    var yPath: Array<Float>? = arrayOf(),
-    var cPath: Array<Int>? = arrayOf()
+    var xPath: ArrayList<Float>? = arrayListOf(),
+    var yPath: ArrayList<Float>? = arrayListOf(),
+    var cPath: ArrayList<Int>? = arrayListOf()
 )

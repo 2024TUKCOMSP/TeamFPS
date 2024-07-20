@@ -13,6 +13,7 @@ import com.example.myapplication.data.Paints
 import com.example.myapplication.data.Users
 import com.google.firebase.database.FirebaseDatabase
 
+
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

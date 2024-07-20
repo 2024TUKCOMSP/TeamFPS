@@ -14,6 +14,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.myapplication.R
+import com.example.myapplication.data.Paints
 import com.example.myapplication.gallary.PaintView.Companion.colorList
 import com.example.myapplication.gallary.PaintView.Companion.currentBrush
 import com.example.myapplication.gallary.PaintView.Companion.pathList
@@ -83,7 +84,9 @@ class GallaryFragment : Fragment() {
         paintend.setOnClickListener{
             val database = FirebaseDatabase.getInstance()
             val paintsRef = database.getReference("paint")
-
+            val paintpid = database.getReference("pid")
+            val paint = Paints(null,null,null,null,null, xpathList, ypathList, colorList)
+            paintsRef.child(paint.pid!!).setValue(paint)
         }
 
     }
