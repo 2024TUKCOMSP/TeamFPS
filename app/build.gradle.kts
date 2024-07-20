@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
+    // Add the Google services Gradle plugin
+    id("com.google.gms.google-services")
     alias(libs.plugins.jetbrainsKotlinAndroid)
 }
 
@@ -56,14 +58,44 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.2.1")
     implementation("com.airbnb.android:lottie:3.1.0")
 
+    implementation("androidx.core:core-splashscreen:1.0.1") //Splash
+
+    implementation ("com.kakao.sdk:v2-all:2.20.3") // 전체 모듈 설치, 2.11.0 버전부터 지원
+    implementation ("com.kakao.sdk:v2-user:2.20.3") // 카카오 로그인 API 모듈
+    implementation ("com.kakao.sdk:v2-cert:2.20.3") // 카카오톡 인증 서비스 API 모듈
+
+    //Google 로그인
+    implementation("androidx.credentials:credentials:1.2.2")
+    implementation("androidx.credentials:credentials-play-services-auth:1.2.2")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
+
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+
+    // Add the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-auth-ktx")
+
+    // Also add the dependency for the Google Play services library and specify its version
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+
+    //firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2")) //Firebase BoM
+    implementation("com.google.firebase:firebase-auth-ktx")             //Authentication library
+    implementation("com.google.android.gms:play-services-auth:20.7.0")  //google Play Service Library
+    implementation("com.google.firebase:firebase-analytics")
+
+    //picasso
+//    implementation("com.squareup.picasso:picasso:2.8")
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.firebase.database.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-
 }
