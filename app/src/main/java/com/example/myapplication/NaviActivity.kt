@@ -15,6 +15,7 @@ import com.example.myapplication.gallary.GallaryFragment
 import com.example.myapplication.home.HomeFragment
 import com.example.myapplication.profile.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.FirebaseApp
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -25,6 +26,10 @@ class NaviActivity : AppCompatActivity() {
     lateinit var binding : ActivityNaviBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //파이어베이스 초기화
+        FirebaseApp.initializeApp(this)
+
         binding = ActivityNaviBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -34,6 +39,7 @@ class NaviActivity : AppCompatActivity() {
         val gallaryFragment = GallaryFragment()
         replaceFragment(homeFragment)
         bottomNavigationView.selectedItemId = R.id.home
+
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             when(item.itemId) {
@@ -58,13 +64,18 @@ class NaviActivity : AppCompatActivity() {
 
         val database = FirebaseDatabase.getInstance()
         val usersRef = database.getReference("users")
+        Log.d("yang","token1")
+
+        //token을 해쉬 값으로 변환
+        val uid = getUidFromToken(token)
         //데이터 존재 확인을 위해 token(user)의 데이터 스냅샷을 한번 읽어오는 함수
-        usersRef.child(token).addListenerForSingleValueEvent(object: ValueEventListener {
+        usersRef.child(uid).addListenerForSingleValueEvent(object: ValueEventListener {
             //데이터를 성공적으로 읽어본 경우
             override fun onDataChange(snapshot: DataSnapshot) {
+                //Log.d("yang","token2")
                 if(!snapshot.exists()){
                     //DB에 없는 경우 회원가입
-                    showSignUpDialog(token)
+                    showSignUpDialog(uid)
                 }
             }
             //데이터 읽기가 실패한 경우
@@ -75,7 +86,7 @@ class NaviActivity : AppCompatActivity() {
     }
 
     //커스텀 다이얼로그 설정
-    private fun showSignUpDialog(token: String?){
+    private fun showSignUpDialog(uid: String){
         //커스텀 다이얼로그의 뷰바인딩 설정
         val dialogBinding = CustomDialogBinding.inflate(layoutInflater)
         //다이얼로그 설정
@@ -116,7 +127,7 @@ class NaviActivity : AppCompatActivity() {
             val usersRef = database.getReference("users")
             
             //회원정보 클래스 생성
-            val user = Users(token,name,nickname,null)
+            val user = Users(uid,name,nickname,null)
             //db에 회원정보 저장
             usersRef.child(user.uid!!).setValue(user)
 
@@ -124,7 +135,11 @@ class NaviActivity : AppCompatActivity() {
         }
 
     }
-    
+
+    private fun getUidFromToken(token: String): String{
+        return token.hashCode().toString()
+    }
+
     private fun replaceFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction()
             .apply {
