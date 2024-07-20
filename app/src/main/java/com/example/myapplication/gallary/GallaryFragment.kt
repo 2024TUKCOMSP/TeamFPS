@@ -85,7 +85,7 @@ class GallaryFragment : Fragment() {
             val database = FirebaseDatabase.getInstance()
             val paintsRef = database.getReference("paint")
             val paintpid = database.getReference("pid")
-            val paint = Paints(null,null,null,null,null, xpathList, ypathList, colorList)
+            val paint = Paints("333",null,500,null,null, xpathList, ypathList, colorList)
             paintsRef.child(paint.pid!!).setValue(paint)
         }
 
