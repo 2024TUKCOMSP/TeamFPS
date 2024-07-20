@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.myapplication.data.Paints
+import com.example.myapplication.data.Pid
 import com.example.myapplication.data.Users
 import com.google.firebase.database.FirebaseDatabase
 
@@ -23,7 +24,6 @@ class SplashActivity : AppCompatActivity() {
             startActivity(Intent(this, NaviActivity::class.java))
             finish()
         },1000) //1초 후 메인화면으로 이동
-
         /*//DB저장 테스트
         val database = FirebaseDatabase.getInstance()
         val usersRef = database.getReference("users")
