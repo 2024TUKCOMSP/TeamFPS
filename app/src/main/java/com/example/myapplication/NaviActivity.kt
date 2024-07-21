@@ -146,5 +146,6 @@ class NaviActivity : AppCompatActivity() {
                 replace(R.id.fragmentContainer, fragment)
                 commit()
             }
+        invalidateOptionsMenu()
     }
 }

@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:theme="?attr/actionBarTheme"
         app:menu="@menu/menu_profile"
-        app:title="마이페이지"/>
+        app:title="마이페이지"
+        android:id="@+id/myPageToolbar"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
