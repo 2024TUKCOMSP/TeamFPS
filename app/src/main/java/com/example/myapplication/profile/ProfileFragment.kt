@@ -56,7 +56,7 @@ class ProfileFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.menu_name -> {
-                Toast.makeText(requireContext(), "이름 변경 선택됨", Toast.LENGTH_SHORT).show()
+
                 true
             }
             R.id.menu_logout ->{
