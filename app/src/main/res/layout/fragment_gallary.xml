@@ -36,13 +36,29 @@
             android:layout_height="50dp"
             android:layout_margin="10dp"
             android:background="@drawable/white_background"/>
-        
+
     </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/paint"
+        android:layout_width="match_parent"
+        android:layout_height="520dp"
+        android:layout_below="@+id/toolbar">
+        <include layout="@layout/paint_view"/>
+
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar">
-        <include layout="@layout/paint_view"/>
+        android:layout_below="@+id/paint"
+        android:gravity="right"
+        >
+        <Button
+            android:id = "@+id/paintendbutton"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:textSize="10sp"
+            android:text="완성"
+            />
 
     </RelativeLayout>
 
