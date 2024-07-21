@@ -31,8 +31,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:exported="true" />
+            android:name=".Login.LoginActivity"
+            android:exported="true"/>
         <activity
             android:name=".MainActivity"
             android:exported="true" /> <!-- 카카오 로그인, 인가코드를 받기 위한 액티비티 -->
