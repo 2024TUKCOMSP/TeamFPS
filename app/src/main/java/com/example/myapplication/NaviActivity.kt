@@ -20,6 +20,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
+interface TokenProvider{
+    fun getToken(): String?
+}
+
 class NaviActivity : AppCompatActivity() {
 
     lateinit var binding : ActivityNaviBinding
@@ -56,6 +60,9 @@ class NaviActivity : AppCompatActivity() {
 
         //데이터 존재 확인
         checkUser(token, Auth)
+    }
+    fun getToken(): String?{
+        return intent.getStringExtra("TOKEN")
     }
 
     //데이터 존재 확인

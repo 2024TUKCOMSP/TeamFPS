@@ -14,6 +14,7 @@ import com.example.myapplication.gallary.GallaryFragment.Companion.paintBrush
 import com.example.myapplication.gallary.GallaryFragment.Companion.path
 
 class PaintView : View {
+    //createView를 코트린 언어로 보여주는 방법
     constructor(context: Context) : this(context, null){
         init()
     }
@@ -28,6 +29,8 @@ class PaintView : View {
     companion object{
         var pathList = ArrayList<Path>()
         var colorList = ArrayList<Int>()
+        var xpathList = ArrayList<Float>()
+        var ypathList = ArrayList<Float>()
         var currentBrush = Color.BLACK
     }
 
@@ -44,6 +47,9 @@ class PaintView : View {
     override fun onTouchEvent(event: MotionEvent): Boolean {
         var x = event.x
         var y = event.y
+        xpathList.add(x)
+        ypathList.add(y)
+
 
         when(event.action){
             MotionEvent.ACTION_DOWN->{
@@ -62,12 +68,12 @@ class PaintView : View {
     }
 
     override fun onDraw(canvas: Canvas) {
-
         for(i in pathList.indices){
             paintBrush.setColor(colorList[i])
             canvas.drawPath(pathList[i], paintBrush)
             invalidate()
         }
+
     }
 
 }

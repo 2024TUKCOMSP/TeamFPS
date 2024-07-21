@@ -33,8 +33,4 @@
         android:id="@+id/setNickname"
         />
 
-
-
-
-
 </LinearLayout>
