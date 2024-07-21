@@ -5,14 +5,13 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.myapplication.NaviActivity
 import com.example.myapplication.R
 import com.example.myapplication.data.Paints
@@ -26,6 +25,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+
 
 class GallaryFragment : Fragment() {
 
@@ -69,12 +69,10 @@ class GallaryFragment : Fragment() {
         blueBtn.setOnClickListener{
             paintBrush.color = Color.BLUE
             currentColor(paintBrush.color)
-
         }
         blackBtn.setOnClickListener{
             paintBrush.color = Color.BLACK
             currentColor(paintBrush.color)
-
         }
         eraser.setOnClickListener{
             for (i in pathList.indices){
@@ -86,37 +84,15 @@ class GallaryFragment : Fragment() {
             ypathList.clear()
             path.reset()
         }
-        val token = (requireActivity() as? NaviActivity)?.getToken()
-        val uid = token.hashCode().toString()
         //그림 저장하는 데베 코드
         paintend.setOnClickListener{
-            //데베 연결
-            val database = FirebaseDatabase.getInstance()
-            //그림 데베 정보 접근
-            val paintsRef = database.getReference("paint")
-            //pid 데베 정보 접근
-            val pidRef = database.getReference("pid")
-            pidRef.child("1").addListenerForSingleValueEvent(object: ValueEventListener {
-                //데이터를 성공적으로 읽어본 경우
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val retrievedPid = snapshot.getValue(Pid::class.java)
-                    //Log.d("yang","token2")
-                    if (snapshot.exists()) {
-                        var Intpid = retrievedPid?.pid?.plus(1)
-                        val setpid = Pid(Intpid)
-                        pidRef.child("1").setValue(setpid)
+
+            val customDialog = SelectDrawingCostName(requireContext())
+            customDialog.show()
+            val token = (requireActivity() as? NaviActivity)?.getToken()
+            val uid = token.hashCode().toString()
 
 
-                        val paint = Paints(Intpid.toString(),uid,"500",null,null, xpathList, ypathList, colorList)
-                        paintsRef.child(paint.pid!!).setValue(paint)
-                    }
-                }
-
-                //데이터 읽기가 실패한 경우
-                override fun onCancelled(e: DatabaseError) {
-                    Log.d("yang", "데이터 호출 실패: $e")
-                }
-            })
         }
 
     }
