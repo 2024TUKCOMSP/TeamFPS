@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
                 // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
                 Log.d("naver", "login")
                 //로그인 시 토큰을 가지고 navi로 이동
-                moveActivity(NaverIdLoginSDK.getAccessToken())
+                moveActivity(NaverIdLoginSDK.getAccessToken(),"Naver")
 
 //                binding.tvAccessToken.text = NaverIdLoginSDK.getAccessToken()
 //                binding.tvRefreshToken.text = NaverIdLoginSDK.getRefreshToken()
@@ -114,10 +114,12 @@ class LoginActivity : AppCompatActivity() {
                     Log.d("kakao", "login")
                     Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
                     //로그인 시 토큰을 가지고 navi로 이동
-                    moveActivity(token.accessToken)
+                    //moveActivity(token.accessToken)
+                    fetchUid()
 
                 }
             }
+
 
             // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
             if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
@@ -137,7 +139,8 @@ class LoginActivity : AppCompatActivity() {
                         Log.d("kakao", "login")
                         Log.i(TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
                         //로그인 시 토큰을 가지고 navi로 이동
-                        moveActivity(token.accessToken)
+                        //moveActivity(token.accessToken)
+                        fetchUid()
 
                     }
                 }
@@ -222,7 +225,7 @@ class LoginActivity : AppCompatActivity() {
                     // 로그인 성공 처리
 
                     //로그인 시 토큰을 가지고 navi로 이동
-                    moveActivity(idToken)
+                    moveActivity(idToken,"Google")
 
                     Log.d("ggoog", "login")
 
@@ -233,11 +236,25 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //토큰을 넘긴 채 Navi로 이동
-    private fun moveActivity(token: String?) {
+    private fun moveActivity(token: String?, Auth: String) {
         val intent = Intent(this, NaviActivity::class.java)
         intent.putExtra("TOKEN",token)
+        intent.putExtra("Auth", Auth)
         startActivity(intent)
         finish()
+    }
+
+    //카카오톡 로그인 토큰의 고유 UserId를 호출하는 함수
+    private fun fetchUid() {
+        UserApiClient.instance.me { user, error ->
+            if (error != null) {
+                Log.e("yang", "사용자 정보 요청 실패", error)
+            } else if (user != null) {
+                val userId = user.id
+                Log.i("yang", "사용자 정보 요청 성공. 사용자 ID: $userId")
+                moveActivity(userId.toString(), "Kakao")
+            }
+        }
     }
 
     companion object {

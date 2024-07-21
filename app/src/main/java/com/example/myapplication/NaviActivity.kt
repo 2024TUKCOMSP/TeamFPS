@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -52,14 +51,15 @@ class NaviActivity : AppCompatActivity() {
 
         //로그인 토큰 받기
         val token = intent.getStringExtra("TOKEN")
+        val Auth = intent.getStringExtra("Auth")
        // val token = "abcdfe"
 
         //데이터 존재 확인
-        checkUser(token)
+        checkUser(token, Auth)
     }
 
     //데이터 존재 확인
-    private fun checkUser(token: String?){
+    private fun checkUser(token: String?, Auth: String?){
         if (token== null) return
 
         val database = FirebaseDatabase.getInstance()
@@ -75,7 +75,7 @@ class NaviActivity : AppCompatActivity() {
                 //Log.d("yang","token2")
                 if(!snapshot.exists()){
                     //DB에 없는 경우 회원가입
-                    showSignUpDialog(uid)
+                    showSignUpDialog(uid,Auth)
                 }
             }
             //데이터 읽기가 실패한 경우
@@ -86,7 +86,7 @@ class NaviActivity : AppCompatActivity() {
     }
 
     //커스텀 다이얼로그 설정
-    private fun showSignUpDialog(uid: String){
+    private fun showSignUpDialog(uid: String, Auth: String?){
         //커스텀 다이얼로그의 뷰바인딩 설정
         val dialogBinding = CustomDialogBinding.inflate(layoutInflater)
         //다이얼로그 설정
@@ -127,7 +127,7 @@ class NaviActivity : AppCompatActivity() {
             val usersRef = database.getReference("users")
             
             //회원정보 클래스 생성
-            val user = Users(uid,name,nickname,null)
+            val user = Users(uid,name,nickname,null, Auth)
             //db에 회원정보 저장
             usersRef.child(user.uid!!).setValue(user)
 
