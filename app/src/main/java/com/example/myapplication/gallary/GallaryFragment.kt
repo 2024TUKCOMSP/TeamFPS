@@ -85,20 +85,53 @@ class GallaryFragment : Fragment() {
             path.reset()
         }
         //그림 저장하는 데베 코드
-        paintend.setOnClickListener{
+        paintend.setOnClickListener {
 
             val customDialog = SelectDrawingCostName(requireContext())
             customDialog.show()
             val token = (requireActivity() as? NaviActivity)?.getToken()
             val uid = token.hashCode().toString()
+            val database = FirebaseDatabase.getInstance()
+            //그림 데베 정보 접근
+            val paintsRef = database.getReference("paint")
+            //pid 데베 정보 접근
+            val pidRef = database.getReference("pid")
+            pidRef.child("1").addListenerForSingleValueEvent(object : ValueEventListener {
+                //데이터를 성공적으로 읽어본 경우
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val retrievedPid = snapshot.getValue(Pid::class.java)
+                    //Log.d("yang","token2")
+                    if (snapshot.exists()) {
+                        var Intpid = retrievedPid?.pid?.plus(1)
+                        val setpid = Pid(Intpid)
+                        pidRef.child("1").setValue(setpid)
 
+                        val paint = Paints(
+                            Intpid.toString(),
+                            uid,
+                            "",
+                            "",
+                            0,
+                            xpathList,
+                            ypathList,
+                            colorList
+                        )
+                        paintsRef.child(paint.pid!!).setValue(paint)
+                    }
+                }
 
+                //데이터 읽기가 실패한 경우
+                override fun onCancelled(e: DatabaseError) {
+                    Log.d("yang", "데이터 호출 실패: $e")
+                }
+            })
         }
-
-    }
+        }
     private fun currentColor(color: Int){
         currentBrush = color
         path = Path()
     }
+
+
 
 }

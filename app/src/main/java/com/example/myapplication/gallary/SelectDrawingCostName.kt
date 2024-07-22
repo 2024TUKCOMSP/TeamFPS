@@ -2,14 +2,11 @@ package com.example.myapplication.gallary
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.View
 import android.view.Window
-import android.widget.EditText
-import com.example.myapplication.NaviActivity
 import com.example.myapplication.R
 import com.example.myapplication.data.Paints
 import com.example.myapplication.data.Pid
@@ -21,6 +18,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+
 
 class SelectDrawingCostName(context: Context) : AlertDialog(context){
 
@@ -66,12 +64,16 @@ class SelectDrawingCostName(context: Context) : AlertDialog(context){
                     val retrievedPid = snapshot.getValue(Pid::class.java)
                     //Log.d("yang","token2")
                     if (snapshot.exists()) {
-                        var Intpid = retrievedPid?.pid?.plus(1)
-                        val setpid = Pid(Intpid)
-                        pidRef.child("1").setValue(setpid)
+                        var Intpid = retrievedPid?.pid?.toString()
+                        var costrefset = Intpid+"/cost"
+                        var namerefset = Intpid+"/name"
+                        Log.d("nameoutput",costrefset)
+                        Log.d("nameoutput",namerefset)
+                        val hopperUpdates: MutableMap<String, Any> = HashMap()
+                        hopperUpdates[costrefset] = cost
+                        hopperUpdates[namerefset] = name
 
-                        val paint = Paints(Intpid.toString(),null,cost.toString(),name.toString(),null, xpathList, ypathList, colorList)
-                        paintsRef.child(paint.pid!!).setValue(paint)
+                        paintsRef.updateChildren(hopperUpdates)
                     }
                 }
 
