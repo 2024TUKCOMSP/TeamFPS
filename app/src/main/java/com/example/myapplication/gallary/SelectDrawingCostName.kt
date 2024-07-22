@@ -11,6 +11,7 @@ import com.example.myapplication.R
 import com.example.myapplication.data.Paints
 import com.example.myapplication.data.Pid
 import com.example.myapplication.databinding.ActivitySelectDrawingCostNameBinding
+import com.example.myapplication.gallary.GallaryFragment.Companion.path
 import com.example.myapplication.gallary.PaintView.Companion.colorList
 import com.example.myapplication.gallary.PaintView.Companion.xpathList
 import com.example.myapplication.gallary.PaintView.Companion.ypathList

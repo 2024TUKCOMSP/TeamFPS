@@ -12,6 +12,7 @@ import com.example.myapplication.data.Paints
 import com.example.myapplication.data.Pid
 import com.example.myapplication.data.Users
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.MainScope
 
 
 class SplashActivity : AppCompatActivity() {
@@ -20,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler(Looper.getMainLooper()).postDelayed({   //일정 시간 이후 메인으로 이동
-            startActivity(Intent(this, NaviActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         },1000) //1초 후 메인화면으로 이동
         /*//DB저장 테스트

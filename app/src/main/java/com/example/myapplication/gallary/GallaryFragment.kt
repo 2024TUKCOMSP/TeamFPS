@@ -1,5 +1,6 @@
 package com.example.myapplication.gallary
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
@@ -53,18 +54,17 @@ class GallaryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         val redBtn = view.findViewById<ImageButton>(R.id.redColor)
         val blueBtn = view.findViewById<ImageButton>(R.id.blueColor)
         val blackBtn = view.findViewById<ImageButton>(R.id.blackColor)
         val eraser = view.findViewById<ImageButton>(R.id.whiteColor)
         val paintend = view.findViewById<Button>(R.id.paintendbutton)
+        val seepaint = view.findViewById<Button>(R.id.seedrawing)
 
         redBtn.setOnClickListener{
             paintBrush.color = Color.RED
             currentColor(paintBrush.color)
-            for(i in xpathList.indices)
-            Log.d("path", xpathList[i].toString())
-
         }
         blueBtn.setOnClickListener{
             paintBrush.color = Color.BLUE
@@ -75,15 +75,18 @@ class GallaryFragment : Fragment() {
             currentColor(paintBrush.color)
         }
         eraser.setOnClickListener{
-            for (i in pathList.indices){
-                var pathlog = Log.d("pathlist",pathList[i].toString())
-            }
             pathList.clear()
             colorList.clear()
             xpathList.clear()
             ypathList.clear()
             path.reset()
         }
+        //그림 보는 코드
+        seepaint.setOnClickListener{
+            var intnet: Intent = Intent(requireContext(),SeeDrawActivity::class.java)
+            startActivity(intnet)
+        }
+
         //그림 저장하는 데베 코드
         paintend.setOnClickListener {
 
@@ -118,6 +121,11 @@ class GallaryFragment : Fragment() {
                         )
                         paintsRef.child(paint.pid!!).setValue(paint)
                     }
+                    pathList.clear()
+                    colorList.clear()
+                    xpathList.clear()
+                    ypathList.clear()
+                    path.reset()
                 }
 
                 //데이터 읽기가 실패한 경우
