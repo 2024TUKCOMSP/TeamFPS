@@ -85,6 +85,8 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:20.7.0")  //google Play Service Library
     implementation("com.google.firebase:firebase-analytics")
 
+    //이미지 처리를 위한 Glide 라이브러리
+    implementation("com.github.bumptech.glide:glide:4.16.0")
     //picasso
 //    implementation("com.squareup.picasso:picasso:2.8")
 
