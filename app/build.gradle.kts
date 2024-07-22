@@ -65,28 +65,28 @@ dependencies {
     implementation ("com.kakao.sdk:v2-cert:2.20.3") // 카카오톡 인증 서비스 API 모듈
 
     //Google 로그인
-    implementation("androidx.credentials:credentials:1.2.2")
-    implementation("androidx.credentials:credentials-play-services-auth:1.2.2")
-    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
 
     // Import the BoM for the Firebase platform
-    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation(platform(libs.firebase.bom.v3231))
 
     // Add the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation(libs.firebase.auth.ktx)
 
     // Also add the dependency for the Google Play services library and specify its version
-    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation(libs.play.services.auth.v2070)
 
     //firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.1.2")) //Firebase BoM
-    implementation("com.google.firebase:firebase-auth-ktx")             //Authentication library
-    implementation("com.google.android.gms:play-services-auth:20.7.0")  //google Play Service Library
-    implementation("com.google.firebase:firebase-analytics")
+    implementation(platform(libs.google.firebase.bom)) //Firebase BoM
+    implementation(libs.google.firebase.auth.ktx)             //Authentication library
+    implementation(libs.gms.play.services.auth)  //google Play Service Library
+    implementation(libs.firebase.analytics)
 
     //이미지 처리를 위한 Glide 라이브러리
-    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation(libs.glide)
     //picasso
 //    implementation("com.squareup.picasso:picasso:2.8")
 
@@ -97,6 +97,9 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.firebase.database.ktx)
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.storage)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

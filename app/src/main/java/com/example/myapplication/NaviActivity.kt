@@ -77,8 +77,8 @@ class NaviActivity : AppCompatActivity() {
         val uid = getUidFromToken(token)
 
         //token을 sharedPreference에 저장
-        /*val pref = getSharedPreferences("userInfo", MODE_PRIVATE)
-        pref.edit().putString("login_user",uid).apply()*/
+        val pref = getSharedPreferences("userInfo", MODE_PRIVATE)
+        pref.edit().putString("login_user",uid).apply()
 
         //데이터 존재 확인을 위해 token(user)의 데이터 스냅샷을 한번 읽어오는 함수
         usersRef.child(uid).addListenerForSingleValueEvent(object: ValueEventListener {
