@@ -46,7 +46,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="사기"
+            android:text="구매"
             android:id="@+id/buy_btn"
             android:layout_gravity="end"/>
     </LinearLayout>

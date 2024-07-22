@@ -59,8 +59,8 @@ class HomeFragment : Fragment() {
                     binding.moneyText.text = user?.money
                 }
             }
-            override fun onCancelled(e: DatabaseError) {
-                Log.d("yang", "데이터 호출 실패: $e")
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("ykyk", "error: $error")
             }
         })
     }
@@ -73,7 +73,7 @@ class HomeFragment : Fragment() {
                     for (paintSnap in snapshot.children) {
                         val paints = paintSnap.getValue(Paints::class.java)
                         Log.d("ykyk", "paint $paints")
-                        if (paints?.sell == 1 || paints?.uid == uid)
+                        if (paints?.sell == 1||paints?.uid == uid)
                             continue
                         paintList.add(paints!!)
                         val adapter = ResultAdapter(paintList, uid)
@@ -81,9 +81,8 @@ class HomeFragment : Fragment() {
                     }
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(context, "error: $error", Toast.LENGTH_SHORT).show()
+                Log.d("ykyk", "error: $error")
             }
         })
     }
@@ -114,7 +113,7 @@ class ResultAdapter(val paintList: MutableList<Paints>, val uid: String):
                 override fun onDataChange(snapshot: DataSnapshot) {
                     Log.d("ykyk", "snapshot $snapshot")
                     val currentUser = snapshot.getValue(Users::class.java)
-                    if( currentUser != null) {
+                    if (currentUser != null) {
                         Log.d("ykyk", "null 검사")
                         if (currentPaint.cost!!.toInt() > currentUser.money!!.toInt()) {
                             Log.d("ykyk", "돈 부족")
@@ -127,6 +126,7 @@ class ResultAdapter(val paintList: MutableList<Paints>, val uid: String):
                             Log.d("ykyk", "change: $change")
                             Toast.makeText(holder.binding.root.context, "구매하였습니다.", Toast.LENGTH_SHORT).show()
                             paintRef.child(currentPaint.pid!!).child("sell").setValue(1)
+                            getMoney(currentPaint.uid!!, currentPaint.cost!!)
                         }
                     }
                     else
@@ -134,11 +134,28 @@ class ResultAdapter(val paintList: MutableList<Paints>, val uid: String):
                     Log.d("ykyk", "currentUser $currentUser")
                 }
                 //데이터 읽기가 실패한 경우
-                override fun onCancelled(e: DatabaseError) {
-                    Log.d("yang", "데이터 호출 실패: $e")
+                override fun onCancelled(error: DatabaseError) {
+                    Log.d("ykyk", "error: $error")
+                }
+
+                private fun getMoney(uid: String, cost: String) {
+                    userRef.child(uid).addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            val user = snapshot.getValue(Users::class.java)
+                            if (user != null) {
+                                val money = (user.money!!.toInt() + cost.toInt()).toString()
+                                userRef.child(uid).child("money").setValue(money)
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            Log.d("ykyk", "error: $error")
+                        }
+                    })
                 }
             })
         }
+
         holder.apply {
             binding.apply {
                 textview.text = currentPaint.cost
