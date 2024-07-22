@@ -56,7 +56,18 @@ class NaviActivity : AppCompatActivity() {
 
         //로그인 토큰 받기
         val token = intent.getStringExtra("TOKEN")
+
        // val token = "abcdfe"
+
+        //homefragment로 uid 데이터 전달
+        val token1 = "user1"
+        if (token1 != null) {
+//            val uid = getUidFromToken(token1)
+            val homeFragment = homeFragment
+            var bundle = Bundle()
+            bundle.putString("UID", token1)
+            homeFragment.arguments = bundle
+        }
 
         //데이터 존재 확인
         checkUser(token)

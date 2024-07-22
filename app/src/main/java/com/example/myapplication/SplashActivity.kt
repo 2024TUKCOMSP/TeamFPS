@@ -39,12 +39,18 @@ class SplashActivity : AppCompatActivity() {
 //        val database = FirebaseDatabase.getInstance()
 //        val paintsRef = database.getReference("paints")
 //
+//
+//        val database = FirebaseDatabase.getInstance()
+//        val usersRef = database.getReference("users")
+//        val user1 = Users("user1","test", "test@gmail.com","10500")
+//        usersRef.child(user1.uid!!).setValue(user1)
+//        val paintsRef = database.getReference("paints")
 //        val paint1 = Paints("paint1","user1", "10000")
 //        val paint2 = Paints("paint2","user2", "500")
 //        val paint3 = Paints("paint3","user3", "234000")
-//
 //        paintsRef.child(paint1.pid!!).setValue(paint1)
 //        paintsRef.child(paint2.pid!!).setValue(paint2)
 //        paintsRef.child(paint3.pid!!).setValue(paint3)
+
     }
 }

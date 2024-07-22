@@ -5,6 +5,7 @@ data class Users(
     var name: String? = "",
     var nickname: String? = "",
     var profilePictureUrl: String? = "",
-    //var authprovider: String? =""
+    var money: String? = "",
+    var authprovider: String? =""
 )
 //Canvas<-

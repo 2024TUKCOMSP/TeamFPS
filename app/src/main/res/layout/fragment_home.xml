@@ -42,6 +42,7 @@
                 android:textSize="15dp"
                 android:text="보유 마일리지" />
             <TextView
+                android:id="@+id/money_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="25dp"
