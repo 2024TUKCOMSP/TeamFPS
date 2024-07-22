@@ -50,7 +50,6 @@ class PaintView : View {
         xpathList.add(x)
         ypathList.add(y)
 
-
         when(event.action){
             MotionEvent.ACTION_DOWN->{
                 path.moveTo(x,y)

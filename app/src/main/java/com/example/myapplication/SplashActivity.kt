@@ -12,6 +12,7 @@ import com.example.myapplication.data.Paints
 import com.example.myapplication.data.Pid
 import com.example.myapplication.data.Users
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.MainScope
 
 
 class SplashActivity : AppCompatActivity() {
