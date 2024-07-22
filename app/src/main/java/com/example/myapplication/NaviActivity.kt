@@ -71,7 +71,6 @@ class NaviActivity : AppCompatActivity() {
 
         val database = FirebaseDatabase.getInstance()
         val usersRef = database.getReference("users")
-        Log.d("yang","token1")
 
         //token을 해쉬 값으로 변환
         val uid = getUidFromToken(token)

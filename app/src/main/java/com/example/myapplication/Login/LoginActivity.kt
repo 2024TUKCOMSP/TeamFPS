@@ -3,6 +3,7 @@ package com.example.myapplication.Login
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -34,10 +35,9 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        enableEdgeToEdge()
         setContentView(binding.root)
 
-        var keyHash = Utility.getKeyHash(this)
+        val keyHash = Utility.getKeyHash(this)
         Log.d("keyHash", keyHash)
 
         //네아로 객체 초기화
@@ -50,7 +50,6 @@ class LoginActivity : AppCompatActivity() {
                 Log.d("naver", "login")
                 //로그인 시 토큰을 가지고 navi로 이동
                 moveActivity(NaverIdLoginSDK.getAccessToken(),"Naver")
-
 //                binding.tvAccessToken.text = NaverIdLoginSDK.getAccessToken()
 //                binding.tvRefreshToken.text = NaverIdLoginSDK.getRefreshToken()
 //                binding.tvExpires.text = NaverIdLoginSDK.getExpiresAt().toString()
@@ -104,6 +103,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.d("kakao", "login")
                     Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
                     //로그인 시 토큰을 가지고 navi로 이동
+
                     //moveActivity(token.accessToken)
                     fetchUid()
 
@@ -226,10 +226,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //토큰을 넘긴 채 Navi로 이동
-    private fun moveActivity(token: String?, Auth: String) {
+    private fun moveActivity(token: String?, auth: String) {
+        //로그인 방법을 SharedPreferences에 저장
+        //SharedPreference: 간단한 저장을 위한 안드로이드 API
+        val pref = PreferenceManager.getDefaultSharedPreferences(this)
+        pref.edit().putString("login_method",auth).apply()
+
         val intent = Intent(this, NaviActivity::class.java)
         intent.putExtra("TOKEN",token)
-        intent.putExtra("Auth", Auth)
+        intent.putExtra("Auth", auth)
         startActivity(intent)
         finish()
     }
