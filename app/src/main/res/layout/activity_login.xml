@@ -1,101 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
-
-    <com.navercorp.nid.oauth.view.NidOAuthLoginButton
-        android:id="@+id/naver_login"
-        android:layout_width="240dp"
-        android:layout_height="52dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.079" />
-
-    <Button
-        android:id="@+id/naver_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="naver sign out"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.163" />
-
-    <Button
-        android:id="@+id/naver_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="delete"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.24" />
+    android:orientation="vertical"
+    android:gravity="center_vertical">
 
     <ImageView
-        android:id="@+id/kakao_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/kakao_login_medium_narrow"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.345" />
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:src="@drawable/onlinegallery"/>
 
-    <Button
-        android:id="@+id/kakao_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="kakao sign out"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.42" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/kakao_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="delete"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.497" />
+        <com.navercorp.nid.oauth.view.NidOAuthLoginButton
+            android:id="@+id/naver_login"
+            android:layout_width="251dp"
+            android:layout_height="67dp"/>
 
-    <ImageView
-        android:id="@+id/google_login"
-        android:layout_width="247dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="80dp"
-        android:src="@drawable/google_light_sq_si3x"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.609" />
+        <ImageView
+            android:id="@+id/kakao_login"
+            android:layout_width="262dp"
+            android:layout_height="54dp"
+            android:src="@drawable/kakao_login"
+            android:layout_marginTop="20dp"/>
 
-    <Button
-        android:id="@+id/google_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="google sign out"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.71" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/google_login"
+            android:layout_width="253dp"
+            android:layout_height="60dp"
+            android:src="@drawable/google_light_sq_si3x"
+            android:layout_marginTop="20dp"/>
+    </LinearLayout>
+</LinearLayout>

@@ -60,12 +60,12 @@ class NaviActivity : AppCompatActivity() {
        // val token = "abcdfe"
 
         //homefragment로 uid 데이터 전달
-        val token1 = "user1"
-        if (token1 != null) {
-//            val uid = getUidFromToken(token1)
+//        val token1 = "user1"
+        if (token != null) {
+            val uid = getUidFromToken(token)
             val homeFragment = homeFragment
             var bundle = Bundle()
-            bundle.putString("UID", token1)
+            bundle.putString("UID", uid)
             homeFragment.arguments = bundle
         }
 
@@ -145,7 +145,7 @@ class NaviActivity : AppCompatActivity() {
             val usersRef = database.getReference("users")
             
             //회원정보 클래스 생성
-            val user = Users(uid,name,nickname,null)
+            val user = Users(uid,name,nickname,null, "10000")
             //db에 회원정보 저장
             usersRef.child(user.uid!!).setValue(user)
 

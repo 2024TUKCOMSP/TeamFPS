@@ -41,8 +41,11 @@ class HomeFragment : Fragment() {
 
         val uid = arguments?.getString("UID")
 
-        fetchUser(uid!!)
-        fetchData(uid)
+        if (uid != null) {
+            fetchUser(uid)
+            fetchData(uid)
+        }
+        
         binding.paintingList.layoutManager = LinearLayoutManager(context)
         binding.paintingList.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
 
