@@ -6,6 +6,9 @@ data class Users(
     var nickname: String? = "",
     var profilePictureUrl: String? = "",
     var authprovider: String? ="",
-    var money: String? = ""
-)
+    var money: String? = "",
+    var owner: String? = ""
+){
+    constructor() : this("","","","","",null)
+}
 //Canvas<-

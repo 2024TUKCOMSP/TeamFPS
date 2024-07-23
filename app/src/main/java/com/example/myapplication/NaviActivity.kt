@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -86,6 +87,11 @@ class NaviActivity : AppCompatActivity() {
 
         //token을 해쉬 값으로 변환
         val uid = getUidFromToken(token)
+
+        //token을 sharedPreference에 저장
+        val pref = getSharedPreferences("userInfo", MODE_PRIVATE)
+        pref.edit().putString("login_user",uid).apply()
+
         //데이터 존재 확인을 위해 token(user)의 데이터 스냅샷을 한번 읽어오는 함수
         usersRef.child(uid).addListenerForSingleValueEvent(object: ValueEventListener {
             //데이터를 성공적으로 읽어본 경우
