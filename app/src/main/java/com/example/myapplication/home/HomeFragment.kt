@@ -80,10 +80,10 @@ class HomeFragment : Fragment() {
                         if (paints?.sell == 1||paints?.uid == uid)
                             continue
                         paintList.add(paints!!)
-                        val adapter = ResultAdapter(paintList, uid)
-                        binding.paintingList.adapter = adapter
                     }
                 }
+                val adapter = ResultAdapter(paintList, uid)
+                binding.paintingList.adapter = adapter
             }
             override fun onCancelled(error: DatabaseError) {
                 Log.d("ykyk", "error: $error")
