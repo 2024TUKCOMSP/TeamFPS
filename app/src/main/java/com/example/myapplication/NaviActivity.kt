@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -58,6 +59,16 @@ class NaviActivity : AppCompatActivity() {
         val Auth = intent.getStringExtra("Auth")
        // val token = "abcdfe"
 
+        //homefragment로 uid 데이터 전달
+//        val token1 = "user1"
+        if (token != null) {
+            val uid = getUidFromToken(token)
+            val homeFragment = homeFragment
+            var bundle = Bundle()
+            bundle.putString("UID", uid)
+            homeFragment.arguments = bundle
+        }
+
         //데이터 존재 확인
         checkUser(token, Auth)
     }
@@ -71,6 +82,7 @@ class NaviActivity : AppCompatActivity() {
 
         val database = FirebaseDatabase.getInstance()
         val usersRef = database.getReference("users")
+        Log.d("yang","token1")
 
         //token을 해쉬 값으로 변환
         val uid = getUidFromToken(token)
@@ -133,7 +145,7 @@ class NaviActivity : AppCompatActivity() {
             val usersRef = database.getReference("users")
             
             //회원정보 클래스 생성
-            val user = Users(uid,name,nickname,null, Auth)
+            val user = Users(uid,name,nickname,null, Auth, "10000")
             //db에 회원정보 저장
             usersRef.child(user.uid!!).setValue(user)
 

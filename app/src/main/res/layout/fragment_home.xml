@@ -17,14 +17,14 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:id="@+id/profile_image"
-            android:src="@drawable/kakao_login_medium_narrow"
+            android:src="@drawable/onlinegallery"
+            android:background="@drawable/border"
             android:scaleType="fitXY"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Name"
             android:id="@+id/name_text"
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
@@ -42,6 +42,7 @@
                 android:textSize="15dp"
                 android:text="보유 마일리지" />
             <TextView
+                android:id="@+id/money_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="25dp"
