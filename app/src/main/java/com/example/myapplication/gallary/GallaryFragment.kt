@@ -123,7 +123,8 @@ class GallaryFragment : Fragment() {
                             0,
                             xpathList,
                             ypathList,
-                            colorList
+                            colorList,
+                            ""
                         )
                         paintsRef.child(paint.pid!!).setValue(paint)
                     }

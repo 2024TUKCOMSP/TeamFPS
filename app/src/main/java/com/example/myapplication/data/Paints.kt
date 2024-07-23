@@ -8,5 +8,6 @@ data class Paints(
     var sell: Int? = 0,
     var xPath: ArrayList<Float>? = arrayListOf(),
     var yPath: ArrayList<Float>? = arrayListOf(),
-    var cPath: ArrayList<Int>? = arrayListOf()
+    var cPath: ArrayList<Int>? = arrayListOf(),
+    var owner: String? = ""
 )
