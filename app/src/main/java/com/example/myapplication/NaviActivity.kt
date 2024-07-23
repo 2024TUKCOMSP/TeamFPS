@@ -1,9 +1,11 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -58,6 +60,16 @@ class NaviActivity : AppCompatActivity() {
         val Auth = intent.getStringExtra("Auth")
        // val token = "abcdfe"
 
+        //homefragment로 uid 데이터 전달
+//        val token1 = "user1"
+        if (token != null) {
+            val uid = getUidFromToken(token)
+            val homeFragment = homeFragment
+            var bundle = Bundle()
+            bundle.putString("UID", uid)
+            homeFragment.arguments = bundle
+        }
+
         //데이터 존재 확인
         checkUser(token, Auth)
     }
@@ -75,6 +87,11 @@ class NaviActivity : AppCompatActivity() {
 
         //token을 해쉬 값으로 변환
         val uid = getUidFromToken(token)
+
+        //token을 sharedPreference에 저장
+        val pref = getSharedPreferences("userInfo", MODE_PRIVATE)
+        pref.edit().putString("login_user",uid).apply()
+
         //데이터 존재 확인을 위해 token(user)의 데이터 스냅샷을 한번 읽어오는 함수
         usersRef.child(uid).addListenerForSingleValueEvent(object: ValueEventListener {
             //데이터를 성공적으로 읽어본 경우
@@ -134,7 +151,7 @@ class NaviActivity : AppCompatActivity() {
             val usersRef = database.getReference("users")
             
             //회원정보 클래스 생성
-            val user = Users(uid,name,nickname,null, Auth)
+            val user = Users(uid,name,nickname,null, Auth, "10000")
             //db에 회원정보 저장
             usersRef.child(user.uid!!).setValue(user)
 

@@ -2,18 +2,16 @@ package com.example.myapplication.gallary
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.View
 import android.view.Window
-import android.widget.EditText
-import com.example.myapplication.NaviActivity
 import com.example.myapplication.R
 import com.example.myapplication.data.Paints
 import com.example.myapplication.data.Pid
 import com.example.myapplication.databinding.ActivitySelectDrawingCostNameBinding
+import com.example.myapplication.gallary.GallaryFragment.Companion.path
 import com.example.myapplication.gallary.PaintView.Companion.colorList
 import com.example.myapplication.gallary.PaintView.Companion.xpathList
 import com.example.myapplication.gallary.PaintView.Companion.ypathList
@@ -21,6 +19,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+
 
 class SelectDrawingCostName(context: Context) : AlertDialog(context){
 
@@ -50,14 +49,17 @@ class SelectDrawingCostName(context: Context) : AlertDialog(context){
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         //yes버튼 기능
+
         dialogBinding.yesButton.setOnClickListener {
             // 확인 버튼 클릭 시 처리할 로직을 여기에 추가
             val cost = dialogBinding.picturecost.text.toString()
             val name = dialogBinding.picturename.text.toString()
+            //이름과 닉네임이 비어있지 않을 때 완료버튼 활성화
+            dialogBinding.yesButton.isEnabled = dialogBinding.picturecost.text.isNotEmpty() && dialogBinding.picturename.text.isNotEmpty()
             //데베 연결
             val database = FirebaseDatabase.getInstance()
             //그림 데베 정보 접근
-            val paintsRef = database.getReference("paint")
+            val paintsRef = database.getReference("paints")
             //pid 데베 정보 접근
             val pidRef = database.getReference("pid")
             pidRef.child("1").addListenerForSingleValueEvent(object: ValueEventListener {
@@ -66,12 +68,15 @@ class SelectDrawingCostName(context: Context) : AlertDialog(context){
                     val retrievedPid = snapshot.getValue(Pid::class.java)
                     //Log.d("yang","token2")
                     if (snapshot.exists()) {
-                        var Intpid = retrievedPid?.pid?.plus(1)
-                        val setpid = Pid(Intpid)
-                        pidRef.child("1").setValue(setpid)
+                        var Intpid = retrievedPid?.pid?.toString()
+                        var costrefset = Intpid+"/cost"
+                        var namerefset = Intpid+"/name"
 
-                        val paint = Paints(Intpid.toString(),null,cost.toString(),name.toString(),null, xpathList, ypathList, colorList)
-                        paintsRef.child(paint.pid!!).setValue(paint)
+                        val hopperUpdates: MutableMap<String, Any> = HashMap()
+                        hopperUpdates[costrefset] = cost
+                        hopperUpdates[namerefset] = name
+
+                        paintsRef.updateChildren(hopperUpdates)
                     }
                 }
 

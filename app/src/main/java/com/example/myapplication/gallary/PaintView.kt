@@ -44,12 +44,12 @@ class PaintView : View {
         params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 
+
     override fun onTouchEvent(event: MotionEvent): Boolean {
         var x = event.x
         var y = event.y
         xpathList.add(x)
         ypathList.add(y)
-
 
         when(event.action){
             MotionEvent.ACTION_DOWN->{
