@@ -108,7 +108,6 @@ class ResultAdapter(val paintList: MutableList<Paints>, val uid: String):
         val paintRef = FirebaseDatabase.getInstance().getReference("paints")
         Log.d("ykyk", "uid in re $uid")
 
-        holder.binding.paintings.setImageDrawable(R.drawable.kakao_login_medium_narrow.toDrawable())
 
         holder.binding.buyBtn.setOnClickListener {
             Log.d("ykyk", "버튼 눌림")
