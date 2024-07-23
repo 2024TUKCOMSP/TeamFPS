@@ -130,6 +130,7 @@ class ResultAdapter(val paintList: MutableList<Paints>, val uid: String):
                             Toast.makeText(holder.binding.root.context, "구매하였습니다.", Toast.LENGTH_SHORT).show()
                             paintRef.child(currentPaint.pid!!).child("sell").setValue(1)
                             getMoney(currentPaint.uid!!, currentPaint.cost!!)
+                            paintRef.child(currentPaint.pid!!).child("owner").setValue(uid)
                         }
                     }
                     else
