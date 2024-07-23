@@ -119,7 +119,6 @@ class ProfileFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.menu_name -> {
-
                 showChangeProfileDialog()
                 true
             }
@@ -172,7 +171,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun showChangeProfileDialog(){
-        val dialogBinding = ChangeProfileBinding.inflate(layoutInflater)
+        dialogBinding = ChangeProfileBinding.inflate(layoutInflater)
         //다이얼로그 설정
         val builder = AlertDialog.Builder(requireContext())
             .setTitle("프로필 변경")
