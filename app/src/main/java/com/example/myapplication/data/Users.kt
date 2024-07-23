@@ -6,7 +6,8 @@ data class Users(
     var nickname: String? = "",
     var profilePictureUrl: String? = "",
     var authprovider: String? ="",
-    var mileage: Int?
+    var money: String? = "",
+    var owner: String? = ""
 ){
     constructor() : this("","","","","",null)
 }

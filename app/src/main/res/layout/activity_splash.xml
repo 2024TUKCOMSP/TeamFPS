@@ -12,6 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/intro_image"
-        android:src="@drawable/introimg" />
+        android:src="@drawable/onlinegallery" />
 
   </LinearLayout>

@@ -7,39 +7,46 @@
 
     <ImageView
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:layout_weight="1"
         android:id="@+id/paintings"
         android:padding="2dp"
         android:background="@drawable/border"/>
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:layout_weight="1"
         android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:id="@+id/title_text"
+            android:textSize="35dp"
+            android:text="ABCDE"
+            android:padding="10dp"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="horizontal">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="가격"
-                android:padding="10dp"
-                android:textSize="15dp"/>
+                android:text="가격: "
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textview"
                 android:text="text"
-                android:padding="10dp"
                 android:textSize="25dp"/>
         </LinearLayout>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="사기"
+            android:text="구매"
             android:id="@+id/buy_btn"
             android:layout_gravity="end"/>
     </LinearLayout>
