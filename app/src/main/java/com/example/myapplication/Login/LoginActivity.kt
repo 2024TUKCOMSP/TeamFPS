@@ -1,6 +1,7 @@
 package com.example.myapplication.Login
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -213,12 +214,9 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     // 로그인 성공 처리
-
                     //로그인 시 토큰을 가지고 navi로 이동
                     moveActivity(idToken,"Google")
-
                     Log.d("ggoog", "login")
-
                 } else {
                     // 로그인 실패 처리
                 }
@@ -229,7 +227,7 @@ class LoginActivity : AppCompatActivity() {
     private fun moveActivity(token: String?, auth: String) {
         //로그인 방법을 SharedPreferences에 저장
         //SharedPreference: 간단한 저장을 위한 안드로이드 API
-        val pref = PreferenceManager.getDefaultSharedPreferences(this)
+        val pref = getSharedPreferences("userInfo", MODE_PRIVATE)
         pref.edit().putString("login_method",auth).apply()
 
         val intent = Intent(this, NaviActivity::class.java)
@@ -246,7 +244,6 @@ class LoginActivity : AppCompatActivity() {
                 Log.e("yang", "사용자 정보 요청 실패", error)
             } else if (user != null) {
                 val userId = user.id
-                Log.i("yang", "사용자 정보 요청 성공. 사용자 ID: $userId")
                 moveActivity(userId.toString(), "Kakao")
             }
         }
