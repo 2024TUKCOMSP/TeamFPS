@@ -92,11 +92,17 @@ class GallaryFragment : Fragment() {
 
             val customDialog = SelectDrawingCostName(requireContext())
             customDialog.show()
+
+
+
+            //토큰
             val token = (requireActivity() as? NaviActivity)?.getToken()
             val uid = token.hashCode().toString()
+
+
             val database = FirebaseDatabase.getInstance()
             //그림 데베 정보 접근
-            val paintsRef = database.getReference("paint")
+            val paintsRef = database.getReference("paints")
             //pid 데베 정보 접근
             val pidRef = database.getReference("pid")
             pidRef.child("1").addListenerForSingleValueEvent(object : ValueEventListener {

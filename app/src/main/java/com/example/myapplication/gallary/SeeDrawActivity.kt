@@ -12,6 +12,5 @@ class SeeDrawActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_see_draw)
-
     }
 }

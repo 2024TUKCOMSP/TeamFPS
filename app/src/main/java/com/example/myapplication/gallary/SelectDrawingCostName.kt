@@ -49,10 +49,13 @@ class SelectDrawingCostName(context: Context) : AlertDialog(context){
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         //yes버튼 기능
+
         dialogBinding.yesButton.setOnClickListener {
             // 확인 버튼 클릭 시 처리할 로직을 여기에 추가
             val cost = dialogBinding.picturecost.text.toString()
             val name = dialogBinding.picturename.text.toString()
+            //이름과 닉네임이 비어있지 않을 때 완료버튼 활성화
+            dialogBinding.yesButton.isEnabled = dialogBinding.picturecost.text.isNotEmpty() && dialogBinding.picturename.text.isNotEmpty()
             //데베 연결
             val database = FirebaseDatabase.getInstance()
             //그림 데베 정보 접근
@@ -68,8 +71,7 @@ class SelectDrawingCostName(context: Context) : AlertDialog(context){
                         var Intpid = retrievedPid?.pid?.toString()
                         var costrefset = Intpid+"/cost"
                         var namerefset = Intpid+"/name"
-                        Log.d("nameoutput",costrefset)
-                        Log.d("nameoutput",namerefset)
+
                         val hopperUpdates: MutableMap<String, Any> = HashMap()
                         hopperUpdates[costrefset] = cost
                         hopperUpdates[namerefset] = name

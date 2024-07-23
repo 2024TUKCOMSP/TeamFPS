@@ -1,5 +1,6 @@
 package com.example.myapplication.home
 
+import android.graphics.Paint
 import android.os.Bundle
 import android.text.Layout
 import androidx.fragment.app.Fragment
