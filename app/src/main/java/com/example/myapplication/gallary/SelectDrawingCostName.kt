@@ -59,7 +59,7 @@ class SelectDrawingCostName(context: Context) : AlertDialog(context){
             //데베 연결
             val database = FirebaseDatabase.getInstance()
             //그림 데베 정보 접근
-            val paintsRef = database.getReference("paint")
+            val paintsRef = database.getReference("paints")
             //pid 데베 정보 접근
             val pidRef = database.getReference("pid")
             pidRef.child("1").addListenerForSingleValueEvent(object: ValueEventListener {
