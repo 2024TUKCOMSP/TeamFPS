@@ -14,6 +14,8 @@ import com.example.myapplication.databinding.ActivityNaviBinding
 import com.example.myapplication.databinding.CustomDialogBinding
 import com.example.myapplication.gallary.GallaryFragment
 import com.example.myapplication.home.HomeFragment
+import com.example.myapplication.profile.BuyFragment
+import com.example.myapplication.profile.DrawFragment
 import com.example.myapplication.profile.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
@@ -58,14 +60,12 @@ class NaviActivity : AppCompatActivity() {
         //로그인 토큰 받기
         val token = intent.getStringExtra("TOKEN")
         val Auth = intent.getStringExtra("Auth")
-       // val token = "abcdfe"
+        // val token = "abcdfe"
 
-        //homefragment로 uid 데이터 전달
-//        val token1 = "user1"
+        //fragment로 uid 데이터 전달
         if (token != null) {
             val uid = getUidFromToken(token)
-            val homeFragment = homeFragment
-            var bundle = Bundle()
+            val bundle = Bundle()
             bundle.putString("UID", uid)
             homeFragment.arguments = bundle
         }

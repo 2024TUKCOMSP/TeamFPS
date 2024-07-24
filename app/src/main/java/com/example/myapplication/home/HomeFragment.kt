@@ -41,6 +41,7 @@ class HomeFragment : Fragment() {
         paintList = mutableListOf<Paints>()
 
         val uid = arguments?.getString("UID")
+        Log.d("ykyk", "uid in home: $uid")
 
         if (uid != null) {
             fetchUser(uid)
