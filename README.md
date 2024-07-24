@@ -1,5 +1,5 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&color=0&text=TeamFPS)
-## 어플 이름        [senond](https://capsule-render.vercel.app/api?type=transparent&fontColor=00ffff&text=OnlineGallary)
+## 어플 이름        ![senond](https://capsule-render.vercel.app/api?type=transparent&fontColor=00ffff&text=OnlineGallary&descSize=10)
 ### :notebook_with_decorative_cover: 어플 개발 목적
  - 사람들이 개인창작물을 앱 내 마일리지를 이용해 사고 팔며 가볍게 거래를 하게 해주는 어플
 
