@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
@@ -29,8 +30,6 @@ class PaintView : View {
     companion object{
         var pathList = ArrayList<Path>()
         var colorList = ArrayList<Int>()
-        var xpathList = ArrayList<Float>()
-        var ypathList = ArrayList<Float>()
         var currentBrush = Color.BLACK
     }
 
@@ -45,11 +44,15 @@ class PaintView : View {
     }
 
 
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        Log.d("PaintView", "onSizeChanged: width=$w, height=$h")
+    }
+
+
     override fun onTouchEvent(event: MotionEvent): Boolean {
         var x = event.x
         var y = event.y
-        xpathList.add(x)
-        ypathList.add(y)
 
         when(event.action){
             MotionEvent.ACTION_DOWN->{

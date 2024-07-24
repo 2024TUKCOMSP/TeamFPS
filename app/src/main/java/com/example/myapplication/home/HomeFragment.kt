@@ -12,6 +12,7 @@ import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.data.Paints
 import com.example.myapplication.data.Users
@@ -40,7 +41,9 @@ class HomeFragment : Fragment() {
         userRef = FirebaseDatabase.getInstance().getReference("users")
         paintList = mutableListOf<Paints>()
 
+
         val uid = arguments?.getString("UID")
+        Log.d("ykyk", "uid in home: $uid")
 
         if (uid != null) {
             fetchUser(uid)
@@ -80,10 +83,10 @@ class HomeFragment : Fragment() {
                         if (paints?.sell == 1||paints?.uid == uid)
                             continue
                         paintList.add(paints!!)
-                        val adapter = ResultAdapter(paintList, uid)
-                        binding.paintingList.adapter = adapter
                     }
                 }
+                val adapter = ResultAdapter(paintList, uid)
+                binding.paintingList.adapter = adapter
             }
             override fun onCancelled(error: DatabaseError) {
                 Log.d("ykyk", "error: $error")
@@ -92,7 +95,8 @@ class HomeFragment : Fragment() {
     }
 }
 
-class RecyclerHolder(val binding: RecyclerItemBinding): RecyclerView.ViewHolder(binding.root)
+class RecyclerHolder(val binding: RecyclerItemBinding): RecyclerView.ViewHolder(binding.root){
+}
 
 class ResultAdapter(val paintList: MutableList<Paints>, val uid: String):
     RecyclerView.Adapter<RecyclerHolder>(){
@@ -164,6 +168,9 @@ class ResultAdapter(val paintList: MutableList<Paints>, val uid: String):
             binding.apply {
                 textview.text = currentPaint.cost
                 titleText.text = currentPaint.name
+                Glide.with(holder.binding.root.context)
+                    .load(currentPaint.drawURL)
+                    .into(paintings)
             }
         }
     }

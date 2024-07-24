@@ -21,6 +21,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.bumptech.glide.Glide
@@ -38,6 +39,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
 
@@ -119,7 +121,6 @@ class ProfileFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.menu_name -> {
-
                 showChangeProfileDialog()
                 true
             }
@@ -172,7 +173,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun showChangeProfileDialog(){
-        val dialogBinding = ChangeProfileBinding.inflate(layoutInflater)
+        dialogBinding = ChangeProfileBinding.inflate(layoutInflater)
         //다이얼로그 설정
         val builder = AlertDialog.Builder(requireContext())
             .setTitle("프로필 변경")
@@ -196,18 +197,33 @@ class ProfileFragment : Fragment() {
                 updateProfile(nickname)
                 alertDialog.dismiss()
             }
-            Toast.makeText(requireContext(), "이미지 혹은 닉네임변경부분이 비어있습니다.", Toast.LENGTH_SHORT).show()
+            else
+                Toast.makeText(requireContext(), "이미지 혹은 닉네임변경부분이 비어있습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun updateProfile(nickname: String){
-        val storageRef = FirebaseDatabase.getInstance().reference
-        val imageRef = storageRef.child("profile_images/$loginUser.jpg")
+        val storageRef = FirebaseStorage.getInstance().reference
+        val imageRef = storageRef.child("profile_images/$loginUser")
+        Log.d("yang","updateProfileTest: $imageUri")
 
-        /*val uploadTask = storageRef.putFile(imageUri!!)
-            .addOnSuccessListener{
-            //db에 update하는 코드
-            }*/
+        val database = FirebaseDatabase.getInstance()
+        val usersRef = database.getReference("users").child(loginUser)
+
+        //닉네임 변경
+        usersRef.child("nickname").setValue(nickname)
+
+
+        imageRef.putFile(imageUri!!).addOnSuccessListener{
+            imageRef.downloadUrl.addOnSuccessListener { downloadUri ->
+                usersRef.child("profilePictureUrl").setValue(downloadUri.toString())
+            }
+            }
+            .addOnFailureListener{exception ->
+                Log.e("yang", "이미지 업로드 실패", exception)
+                Toast.makeText(requireContext(), "이미지 업로드 실패", Toast.LENGTH_SHORT).show()
+
+            }
     }
     private fun loadUserInfo() {
         //현재 로그인한 유저 객체
@@ -215,7 +231,7 @@ class ProfileFragment : Fragment() {
         val database = FirebaseDatabase.getInstance()
         val usersRef = database.getReference("users").child(loginUser)
 
-        usersRef.addListenerForSingleValueEvent(object: ValueEventListener{
+        usersRef.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val userProfile = snapshot.getValue(Users::class.java)
                 Log.d("yang", "loadUserInfo $userProfile")

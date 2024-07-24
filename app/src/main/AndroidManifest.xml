@@ -16,15 +16,7 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31" >
         <activity
-            android:name=".gallary.SeeDrawActivity"
-            android:exported="false" />
-        <!--<activity
-            android:name=".gallary.GetPaintingView"
-            android:exported="false" />-->
-        <!--<activity
-            android:name=".gallary.SelectDrawingCostName"
-            android:exported="false" />-->
-        <activity
+
             android:name=".NaviActivity"
             android:exported="true" />
         <activity
@@ -38,8 +30,7 @@
         </activity>
         <activity
             android:name=".Login.LoginActivity"
-            android:exported="true" />
-        <!-- 카카오 로그인, 인가코드를 받기 위한 액티비티 -->
+
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true" >

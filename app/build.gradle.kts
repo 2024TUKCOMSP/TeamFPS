@@ -91,7 +91,7 @@ dependencies {
     //picasso
 //    implementation("com.squareup.picasso:picasso:2.8")
 
-
+    implementation("com.google.firebase:firebase-storage:21.0.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

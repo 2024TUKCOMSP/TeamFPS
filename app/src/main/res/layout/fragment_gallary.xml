@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".gallary.GallaryFragment">
     <LinearLayout
         android:id = "@+id/toolbar"
@@ -61,12 +62,5 @@
             />
 
     </RelativeLayout>
-    <Button
-        android:id = "@+id/seedrawing"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:textSize="10sp"
-        android:text="그림"
-        />
 
 </RelativeLayout>
