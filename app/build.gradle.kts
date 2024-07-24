@@ -86,6 +86,7 @@ dependencies {
     implementation(libs.firebase.analytics)
 
     //이미지 처리를 위한 Glide 라이브러리
+
     implementation(libs.glide)
     //picasso
 //    implementation("com.squareup.picasso:picasso:2.8")
@@ -100,6 +101,7 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.storage)
+    implementation(libs.firebase.storage.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
