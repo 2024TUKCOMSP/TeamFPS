@@ -34,9 +34,11 @@
 ![firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
 ## 데모
 <p align="center">
-  <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo0.jpg" alt="로그인창" width="250"/>
-  <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo1.jpg" alt="닉네임다이얼로그" width="250"/>
-  <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo01.jpg" alt="닉네임다이얼로그" width="250"/>
+    | **캘린더 페이지** | **해당 일자에 일정확인** | **일정 추가** |
+| :-------------------: | :--------------------: | :--------------------: |
+  |<img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo0.jpg" alt="로그인창" width="250"/>|
+  |<img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo1.jpg" alt="닉네임다이얼로그" width="250"/>|
+  |<img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo01.jpg" alt="닉네임다이얼로그" width="250"/>|
 
 </p>
 <p align="center">
