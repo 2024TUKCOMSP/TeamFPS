@@ -56,7 +56,15 @@ class GallaryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_gallary, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_gallary, container, false)
+        paintView = rootView.findViewById(R.id.paint_view)
+
+        val paintEndButton: Button =rootView.findViewById(R.id.paintendbutton)
+        paintEndButton.setOnClickListener{
+            viewSave(paintView)
+        }
+
+        return rootView
 
     }
 
@@ -64,11 +72,12 @@ class GallaryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+
         val redBtn = view.findViewById<ImageButton>(R.id.redColor)
         val blueBtn = view.findViewById<ImageButton>(R.id.blueColor)
         val blackBtn = view.findViewById<ImageButton>(R.id.blackColor)
         val eraser = view.findViewById<ImageButton>(R.id.whiteColor)
-        val paintend = view.findViewById<Button>(R.id.paintendbutton)
+        //val paintend = view.findViewById<Button>(R.id.paintendbutton)
 
         redBtn.setOnClickListener{
             paintBrush.color = Color.RED
@@ -85,9 +94,65 @@ class GallaryFragment : Fragment() {
         eraser.setOnClickListener{
             pathList.clear()
             colorList.clear()
+            xpathList.clear()
+            ypathList.clear()
             path.reset()
         }
-    }
+
+//        //그림 저장하는 데베 코드
+//        paintend.setOnClickListener {
+//            Log.d("hyun", "bug 위치 : 버튼누르기 ")
+//            viewSave(paintView)
+////            val customDialog = SelectDrawingCostName(requireContext())
+////            customDialog.show()
+////            //토큰
+////            val token = (requireActivity() as? NaviActivity)?.getToken()
+////            val uid = token.hashCode().toString()
+////
+////
+////            val database = FirebaseDatabase.getInstance()
+////            //그림 데베 정보 접근
+////            val paintsRef = database.getReference("paints")
+////            //pid 데베 정보 접근
+////            val pidRef = database.getReference("pid")
+////            pidRef.child("1").addListenerForSingleValueEvent(object : ValueEventListener {
+////                //데이터를 성공적으로 읽어본 경우
+////                override fun onDataChange(snapshot: DataSnapshot) {
+////                    val retrievedPid = snapshot.getValue(Pid::class.java)
+////                    //Log.d("yang","token2")
+////                    if (snapshot.exists()) {
+////                        var Intpid = retrievedPid?.pid?.plus(1)
+////                        val setpid = Pid(Intpid)
+////                        pidRef.child("1").setValue(setpid)
+////
+////                        val paint = Paints(
+////                            Intpid.toString(),
+////                            uid,
+////                            "",
+////                            "",
+////                            0,
+////                            xpathList,
+////                            ypathList,
+////                            colorList,
+////                            ""
+////                        )
+////                        paintsRef.child(paint.pid!!).setValue(paint)
+////                    }
+////                    pathList.clear()
+////                    colorList.clear()
+////                    xpathList.clear()
+////                    ypathList.clear()
+////                    path.reset()
+////                }
+////
+////                //데이터 읽기가 실패한 경우
+////                override fun onCancelled(e: DatabaseError) {
+////                    Log.d("yang", "데이터 호출 실패: $e")
+////                }
+////            })
+////        }
+//        }
+        }
     private fun getViewBitmap(view: View): Bitmap {
         //뷰의 크기('measuredWidth','measuredHeight')에 맞는 빈 비트맵 이미지를 생성한다. ARGB_8888은 32비트맵을 의미
         Log.d("hyun", "bug 위치 : 비트맵 생성 전 ")
@@ -179,6 +244,8 @@ class GallaryFragment : Fragment() {
                             }
                             pathList.clear()
                             colorList.clear()
+                            xpathList.clear()
+                            ypathList.clear()
                         }
 
                         override fun onCancelled(e: DatabaseError) {

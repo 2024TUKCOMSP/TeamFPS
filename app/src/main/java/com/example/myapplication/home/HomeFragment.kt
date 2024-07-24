@@ -12,6 +12,7 @@ import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.data.Paints
 import com.example.myapplication.data.Users
@@ -39,6 +40,7 @@ class HomeFragment : Fragment() {
         paintRef = FirebaseDatabase.getInstance().getReference("paints")
         userRef = FirebaseDatabase.getInstance().getReference("users")
         paintList = mutableListOf<Paints>()
+
 
         val uid = arguments?.getString("UID")
 
@@ -92,7 +94,8 @@ class HomeFragment : Fragment() {
     }
 }
 
-class RecyclerHolder(val binding: RecyclerItemBinding): RecyclerView.ViewHolder(binding.root)
+class RecyclerHolder(val binding: RecyclerItemBinding): RecyclerView.ViewHolder(binding.root){
+}
 
 class ResultAdapter(val paintList: MutableList<Paints>, val uid: String):
     RecyclerView.Adapter<RecyclerHolder>(){
@@ -164,6 +167,9 @@ class ResultAdapter(val paintList: MutableList<Paints>, val uid: String):
             binding.apply {
                 textview.text = currentPaint.cost
                 titleText.text = currentPaint.name
+                Glide.with(holder.binding.root.context)
+                    .load(currentPaint.drawURL)
+                    .into(paintings)
             }
         }
     }
