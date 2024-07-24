@@ -36,7 +36,6 @@
 <p align="center">
   <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo0.jpg" alt="캘린더" width="300"/>
   <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo1.jpg" alt="캘린더" width="300"/>
-
   <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo01.jpg" alt="캘린더" width="300"/>
 
 </p>
@@ -55,7 +54,8 @@
   <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo8.jpg" alt="캘린더" width="300"/>
   <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo9.jpg" alt="캘린더" width="300"/>
   <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo10.jpg" alt="캘린더" width="300"/>
-</p><p align="center">
+</p>
+<p align="center">
   <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo11.jpg" alt="캘린더" width="300"/>
   <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo12.jpg" alt="캘린더" width="300"/>
   <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo13.jpg" alt="캘린더" width="300"/>
