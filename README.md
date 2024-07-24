@@ -32,6 +32,24 @@
 ![android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
 ![kotlin](https://img.shields.io/badge/Kotlin-0095D5?&style=for-the-badge&logo=kotlin&logoColor=white)
 ![firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
+## 데모
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/18f321b8-ff82-4c9d-821b-93e260d9d8b9" alt="캘린더" width="300"/>
+  <img src="https://github.com/user-attachments/assets/1e4ff223-9728-4b71-976b-a42e5ada0c5e" alt="할일선택" width="300"/>
+  <img src="https://github.com/user-attachments/assets/24aa7e2d-f374-40d0-affe-e9953c908e7f" alt="카테고리 선택" width="300"/>
+
+</p>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/62ba3589-098f-42c0-8463-7761ad9ac099" alt="카테고리 편집" width="300"/>
+  <img src="https://github.com/user-attachments/assets/e9e3c749-03bc-4490-9af6-bff1ae4fe21c" alt="홈화면" width="300"/>
+  <img src="https://github.com/user-attachments/assets/4bd59851-eed5-488d-9cb0-717e4a36e996" alt="설정화면" width="300"/>
+</p>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f3b515af-d5b8-4a87-926f-250f4235b1bd" alt="테마변경" width="300"/>
+</p>
+
+
+
 ## 각자 한정도 확인용
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=HyunBeen0903)](https://github.com/anuraghazra/github-readme-stats)
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=ydg0724)](https://github.com/anuraghazra/github-readme-stats)
