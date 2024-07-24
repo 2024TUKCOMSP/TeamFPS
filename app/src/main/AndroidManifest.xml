@@ -19,7 +19,7 @@
             android:name=".gallary.SeeDrawActivity"
             android:exported="false" />
         <activity
-            android:name=".gallary.GetPaintView"
+            android:name=".gallary.GetPaintingView"
             android:exported="false" />
         <activity
             android:name=".gallary.SelectDrawingCostName"
@@ -39,9 +39,7 @@
         <activity
             android:name=".Login.LoginActivity"
             android:exported="true" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" /> <!-- 카카오 로그인, 인가코드를 받기 위한 액티비티 -->
+        <!-- 카카오 로그인, 인가코드를 받기 위한 액티비티 -->
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true" >
