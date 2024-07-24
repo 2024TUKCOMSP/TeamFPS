@@ -100,11 +100,6 @@ class GallaryFragment : Fragment() {
             ypathList.clear()
             path.reset()
         }
-        //그림 보는 코드
-        seepaint.setOnClickListener{
-            var intnet: Intent = Intent(requireContext(),SeeDrawActivity::class.java)
-            startActivity(intnet)
-        }
 
 //        //그림 저장하는 데베 코드
 //        paintend.setOnClickListener {
