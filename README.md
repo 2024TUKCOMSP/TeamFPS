@@ -66,6 +66,7 @@
 
 
 ## 개발자들 바로가기
+**김현빈** | **이예권** | **양동권**
 :------: | :-------: | :-------:
 <img src="https://avatars.githubusercontent.com/u/134044125?s=64&v=4" width="150" height="150"/> | <img src=
 "https://avatars.githubusercontent.com/u/169049312?s=64&v=4" width="150" height="150"/> | <img src= "https://avatars.githubusercontent.com/u/89330538?s=64&v=4" width="150" height="150"/>
