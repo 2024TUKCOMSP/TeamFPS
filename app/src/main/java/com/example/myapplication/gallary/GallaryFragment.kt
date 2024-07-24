@@ -79,7 +79,6 @@ class GallaryFragment : Fragment() {
         val blackBtn = view.findViewById<ImageButton>(R.id.blackColor)
         val eraser = view.findViewById<ImageButton>(R.id.whiteColor)
         //val paintend = view.findViewById<Button>(R.id.paintendbutton)
-        val seepaint = view.findViewById<Button>(R.id.seedrawing)
 
         redBtn.setOnClickListener{
             paintBrush.color = Color.RED
