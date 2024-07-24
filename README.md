@@ -40,9 +40,9 @@
 - [x] ![firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
 ## 데모
 
-| **로그인창** | **닉네임다이얼로그** | **닉네임다이얼로그설정** |
-| :-------------------: | :--------------------: | :--------------------: |
-|<img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo0.jpg" alt="로그인창" width="250"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo1.jpg" alt="닉네임다이얼로그" width="250"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo01.jpg" alt="닉네임다이얼로그" width="250"/>|
+ **로그인창** | **닉네임다이얼로그** | **닉네임다이얼로그설정** 
+ :-------------------: | :--------------------: | :--------------------: 
+<img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo0.jpg" alt="로그인창" width="250"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo1.jpg" alt="닉네임다이얼로그" width="250"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo01.jpg" alt="닉네임다이얼로그" width="250"/>
 
 | **홈화면** | **GalleryFragment화면** | **그림저장다이얼로그** |
 | :-------------------: | :--------------------: | :--------------------: |
