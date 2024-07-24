@@ -99,27 +99,21 @@ class GallaryFragment : Fragment() {
     }
     private fun getViewBitmap(view: View): Bitmap {
         //뷰의 크기('measuredWidth','measuredHeight')에 맞는 빈 비트맵 이미지를 생성한다. ARGB_8888은 32비트맵을 의미
-        Log.d("hyun", "bug 위치 : 비트맵 생성 전 ")
         val bitmap = Bitmap.createBitmap(
             view.measuredWidth, view.measuredHeight, Bitmap.Config.ARGB_8888
         )
-        Log.d("hyun", "bug 위치 : 비트맵 생성 ")
         //비트맵을 캔버스에 연결합니다.
         val canvas = Canvas(bitmap)
-        Log.d("hyun", "bug 위치 : 캔버스에 비트맵 연결")
         //뷰의 내용을 캔버스에 그립니다.
         view.draw(canvas)
-        Log.d("hyun", "bug 위치 : 캔버스에 뷰 내용 그리기")
         //캡처된 비트맵을 반환합니다.
         return bitmap
     }
     private fun getSaveFilePathName(): String {
         //기기의 공용 다운로드 디렉터리의 경로를 가져옵니다.
         val folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()
-        Log.d("hyun", "bug 위치 : 다운로드 디렉터리 경로 가져오기")
         //현재 날짜와 시간을 기반으로 파일이름을 생성합니다.
         val fileName = SimpleDateFormat("yyyyMMddHHmmss").format(Date())
-        Log.d("hyun", "bug 위치 : 파일 이름 생성")
         //다운로드 디렉토리 경로와 파일 이름을 결합하여 전체 파일 경로를 반환합니다.
         return "$folder/$fileName.jpg"
     }
@@ -127,15 +121,12 @@ class GallaryFragment : Fragment() {
     private fun bitmapFileSave(bitmap: Bitmap, path: String) {
         //파일 출력 스트림을 선언합니다.
         val fos: FileOutputStream
-        Log.d("hyun", "bug 위치 : 비트맵 파일저장 시작")
         try{
             //주어진 경로에 파일 출력 스트림을 엽니다.
             fos = FileOutputStream(File(path))
-            Log.d("hyun", "bug 위치 : 비트맵 파일저장 출력스트림열기")
             //비트맵을 JPEG 형식으로 압축하여 파일 출력 스트림에 저장합니다. 압축 품질은 100(최고 품질)으로 설정됩니다.
             bitmap.compress(Bitmap.CompressFormat.JPEG,100,fos)
-            Log.d("hyun", bitmap.toString())
-            //파일 출력 스트림을 닫습니다.
+            fos.close()
 
             //*****************파베에 사진 저장 코드
             val storageRef = FirebaseStorage.getInstance().reference
@@ -156,7 +147,6 @@ class GallaryFragment : Fragment() {
                 // 업로드 성공 후 다운로드 URL을 가져옴
                 fileRef.downloadUrl.addOnSuccessListener { uri ->
                     val imageUrl = uri.toString()
-                    Log.d("hyun", "Uploaded image URL: $imageUrl")
 
                     val customDialog = SelectDrawingCostName(requireContext())
                     customDialog.show()
@@ -209,20 +199,13 @@ class GallaryFragment : Fragment() {
     }
     private fun viewSave(view: PaintView) {
         //뷰가 측정된 후에 비트맵을 생성하도록 수정
-        Log.d("hyun", "bug 위치 : view.post 실행 전")
         view.post{
             //뷰를 비트맵 이미지로 변환합니다.
-            Log.d("hyun", "bug 위치 : 뷰 세이브로 가짐")
             val bitmap = getViewBitmap(view)
-            Log.d("hyun", "bug 위치 : 뷰를 비트맵 이미지로 변환 성공")
             //저장할 파일 경로와 이름을 생성합니다.
             val filePath = getSaveFilePathName()
-            Log.d("hyun", filePath)
-            Log.d("hyun", "bug 위치 : 파일 경로와 이름 생성 성공")
             //비트맵 이미지를 파일로 저장합니다
             bitmapFileSave(bitmap, filePath)
-            Log.d("hyun", "bug 위치 : 파일 저장 성공")
-
         }
     }
 
