@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myapplication.NaviActivity
 import com.example.myapplication.data.Paints
 import com.example.myapplication.databinding.DrawBuyItemBinding
@@ -81,6 +82,10 @@ class DrawBuyAdapter(val paintList: MutableList<Paints>):
         holder.apply {
             binding.apply {
                 titleText.text = currentPaint.name
+                Glide.with(holder.binding.root.context)
+                    .load(currentPaint.drawURL)
+                    .into(paintings)
+
             }
         }
     }
