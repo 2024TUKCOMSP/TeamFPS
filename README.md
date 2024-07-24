@@ -55,7 +55,7 @@
   <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo10.jpg" alt="사진선택" width="250"/>
   <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo11.jpg" alt="자신의갤러리" width="250"/>
 </p>
-<p align="left">
+<p align="center">
   <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo12.jpg" alt="사진적용" width="250"/>
   <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo13.jpg" alt="사진및 닉네임 적용후" width="250"/>
 </p>
