@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=waving?color=auto)
+![header](https://capsule-render.vercel.app/api?type=waving?color=3)
 # TeamFPS :gun:
 ## 어플 이름 : Online Gallery 
 ### :notebook_with_decorative_cover: 어플 개발 목적
