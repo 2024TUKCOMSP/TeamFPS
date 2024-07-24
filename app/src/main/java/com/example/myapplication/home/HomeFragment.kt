@@ -32,7 +32,6 @@ class HomeFragment : Fragment() {
     lateinit var paintRef: DatabaseReference
     lateinit var userRef: DatabaseReference
     lateinit var paintList: MutableList<Paints>
-    val getPaintingView = view?.findViewById<GetPaintingView>(R.id.get_painting_view)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
