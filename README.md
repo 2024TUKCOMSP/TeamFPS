@@ -66,10 +66,10 @@
 
 
 ## 개발자들 바로가기
-|<img src="https://avatars.githubusercontent.com/u/134044125?s=64&v=4" width="150" height="150"/>|<img src=
-https://avatars.githubusercontent.com/u/169049312?s=64&v=4 width="150" height="150"/>|<img src=https://avatars.githubusercontent.com/u/89330538?s=64&v=4 width="150" height="150"/>|
-|:-:|:-:|:-:|
-|[@HyunBeen0903](https://github.com/HyunBeen0903)|seung yeon<br/>[@Baaunn](https://github.com/Baaunn)|[@ydg0724](https://github.com/ydg0724)|
+<img src="https://avatars.githubusercontent.com/u/134044125?s=64&v=4" width="150" height="150"/> | <img src=
+https://avatars.githubusercontent.com/u/169049312?s=64&v=4 width="150" height="150"/> | <img src=https://avatars.githubusercontent.com/u/89330538?s=64&v=4 width="150" height="150"/>
+:-:|:-:|:-:
+[@HyunBeen0903](https://github.com/HyunBeen0903) | [@Baaunn](https://github.com/Baaunn) | [@ydg0724](https://github.com/ydg0724)
 
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=HyunBeen0903)](https://github.com/anuraghazra/github-readme-stats)
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=ydg0724)](https://github.com/anuraghazra/github-readme-stats)
