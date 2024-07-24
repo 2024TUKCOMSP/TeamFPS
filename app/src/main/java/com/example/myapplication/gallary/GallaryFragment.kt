@@ -126,7 +126,6 @@ class GallaryFragment : Fragment() {
             fos = FileOutputStream(File(path))
             //비트맵을 JPEG 형식으로 압축하여 파일 출력 스트림에 저장합니다. 압축 품질은 100(최고 품질)으로 설정됩니다.
             bitmap.compress(Bitmap.CompressFormat.JPEG,100,fos)
-            fos.close()
 
             //*****************파베에 사진 저장 코드
             val storageRef = FirebaseStorage.getInstance().reference
@@ -184,6 +183,7 @@ class GallaryFragment : Fragment() {
                             Log.d("yang", "데이터 호출 실패: $e")
                         }
                     })
+                    fos.close()
                 }
             }
 
