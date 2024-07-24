@@ -94,8 +94,6 @@ class GallaryFragment : Fragment() {
         eraser.setOnClickListener{
             pathList.clear()
             colorList.clear()
-            xpathList.clear()
-            ypathList.clear()
             path.reset()
         }
 
@@ -244,8 +242,6 @@ class GallaryFragment : Fragment() {
                             }
                             pathList.clear()
                             colorList.clear()
-                            xpathList.clear()
-                            ypathList.clear()
                         }
 
                         override fun onCancelled(e: DatabaseError) {
