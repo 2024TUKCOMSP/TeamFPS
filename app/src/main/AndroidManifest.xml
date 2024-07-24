@@ -21,9 +21,9 @@
         <!--<activity
             android:name=".gallary.GetPaintingView"
             android:exported="false" />-->
-        <activity
+        <!--<activity
             android:name=".gallary.SelectDrawingCostName"
-            android:exported="false" />
+            android:exported="false" />-->
         <activity
             android:name=".NaviActivity"
             android:exported="true" />
