@@ -56,11 +56,11 @@
 ***
  **프로필 편집화면** | **사진선택** | **자신의갤러리** 
  :-------------------: | :--------------------: | :--------------------: 
-<img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo9.jpg" alt="프로필편집" width="250"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo10.jpg" alt="사진선택" width="250"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo11.jpg" alt="자신의갤러리" width="250"/>
+<img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo9.jpg" alt="프로필편집" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo10.jpg" alt="사진선택" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo11.jpg" alt="자신의갤러리" width="300"/>
 ***
  **사진적용** | **사진 및 닉네임 적용후** 
  :-------------------: | :--------------------: 
-<img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo12.jpg" alt="사진적용" width="250"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo13.jpg" alt="사진및 닉네임 적용후" width="250"/>
+<img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo12.jpg" alt="사진적용" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo13.jpg" alt="사진및 닉네임 적용후" width="300"/>
 
 
 
