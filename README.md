@@ -80,7 +80,7 @@
 😀 [MarkdownImoge](https://inpa.tistory.com/entry/MarkDown-%F0%9F%93%9A-Emoji-%EC%9D%B4%EB%AA%A8%ED%8B%B0%EC%BD%98-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0 "마크다운 이모지") <br>
 😀 [Language](https://shields.io/badges "소프트웨어 로그생성") <br>
 💬 [MarkdownHade](https://github.com/kyechan99/capsule-render?tab=readme-ov-file#wave "제목 꾸미기") <br>
-✍ (https://img.shields.io/badge/Kotlin-0095D5?&style=for-the-badge&logo=kotlin&logoColor=white) [CustomView](https://www.youtube.com/watch?v=8mjv_iDSLcw "그림판") <br>
+✍ [CustomView](https://www.youtube.com/watch?v=8mjv_iDSLcw "그림판") <br>
 ### 타 팀 README 파일도 참고 했습니다.
 💡  이모지 단축키<br>
 Windows : `window key` + `마침표(.)`<br>
