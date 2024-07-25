@@ -81,7 +81,6 @@
 😀 [Language](https://shields.io/badges "소프트웨어 로그생성") <br>
 💬 [MarkdownHade](https://github.com/kyechan99/capsule-render?tab=readme-ov-file#wave "제목 꾸미기") <br>
 ![kotlin](https://img.shields.io/badge/Kotlin-0095D5?&style=for-the-badge&logo=kotlin&logoColor=white) [CustomView](https://www.youtube.com/watch?v=8mjv_iDSLcw "그림판") <br>
-![chatgpt](https://img.shields.io/badge/:badgeContent?style=flat-square&logo=chat%20gpt&logoColor=00ffbf&logoSize=auto)
 ### 타 팀 README 파일도 참고 했습니다.
 💡  이모지 단축키<br>
 Windows : `window key` + `마침표(.)`<br>
