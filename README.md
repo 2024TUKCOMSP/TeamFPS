@@ -76,9 +76,9 @@
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Baaunn)](https://github.com/anuraghazra/github-readme-stats)
 ***
 ## 참고자료 및 문헌
-✒[MarkdownLanguge](https://inpa.tistory.com/entry/MarkDown-%F0%9F%93%9A-%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4-%EB%AC%B8%EB%B2%95-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC "마크다운언어 총정리")
-[MarkdownImoge](https://inpa.tistory.com/entry/MarkDown-%F0%9F%93%9A-Emoji-%EC%9D%B4%EB%AA%A8%ED%8B%B0%EC%BD%98-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0 "마크다운 이모지")
-[MarkdownHade](https://github.com/kyechan99/capsule-render?tab=readme-ov-file#wave "제목 꾸미기")
+✒ [MarkdownLanguge](https://inpa.tistory.com/entry/MarkDown-%F0%9F%93%9A-%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4-%EB%AC%B8%EB%B2%95-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC "마크다운언어 총정리") ✒ 
+😀 [MarkdownImoge](https://inpa.tistory.com/entry/MarkDown-%F0%9F%93%9A-Emoji-%EC%9D%B4%EB%AA%A8%ED%8B%B0%EC%BD%98-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0 "마크다운 이모지") 😀 
+💬 [MarkdownHade](https://github.com/kyechan99/capsule-render?tab=readme-ov-file#wave "제목 꾸미기") 💬
 💡  이모지 단축키
 Windows : window key + 마침표(.)
 Mac : Command + Control + Space bar
