@@ -54,8 +54,18 @@ class ProfileFragment : Fragment() {
     // ActivityResultLauncher를 클래스 멤버로 선언
     private lateinit var requestLauncher: ActivityResultLauncher<Intent>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
+
+        binding.viewpager.adapter = PagerAdapter(requireActivity())
+        TabLayoutMediator(binding.tabs, binding.viewpager){ tab, position ->
+            if (position == 0) tab.text = "Draw"
+            else tab.text = "Buy"
+        }.attach()
 
         // ActivityResultLauncher 초기화
         requestLauncher = registerForActivityResult(
@@ -71,19 +81,6 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentProfileBinding.inflate(inflater, container, false)
-
-        binding.viewpager.adapter = PagerAdapter(requireActivity())
-        TabLayoutMediator(binding.tabs, binding.viewpager){ tab, position ->
-            if (position == 0) tab.text = "Draw"
-            else tab.text = "Buy"
-        }.attach()
 
         auth = FirebaseAuth.getInstance()
 
@@ -235,7 +232,7 @@ class ProfileFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val userProfile = snapshot.getValue(Users::class.java)
                 Log.d("yang", "loadUserInfo $userProfile")
-                if (userProfile!=null){
+                if (userProfile!=null && isAdded){  // Fragment가 Activity에 연결되어 있는지 확인
                     binding.nameText.text = userProfile.nickname
                     //이미지 호출
                     Glide.with(this@ProfileFragment)
