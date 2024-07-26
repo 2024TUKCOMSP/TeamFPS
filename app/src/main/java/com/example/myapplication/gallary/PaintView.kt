@@ -25,12 +25,12 @@ class PaintView : View {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         init()
     }
-
     var params : ViewGroup.LayoutParams? = null
     companion object{
         var pathList = ArrayList<Path>()
         var colorList = ArrayList<Int>()
         var currentBrush = Color.BLACK
+        var backgroundWhite =0;
     }
 
     private fun init(){
@@ -71,10 +71,17 @@ class PaintView : View {
     }
 
     override fun onDraw(canvas: Canvas) {
+        val paint = Paint()
+        paint.setColor(Color.WHITE)
         for(i in pathList.indices){
             paintBrush.setColor(colorList[i])
             canvas.drawPath(pathList[i], paintBrush)
             invalidate()
+        }
+        if(backgroundWhite==0){
+            //canvas에 하얀색 사각형을 씌우고 시작
+            backgroundWhite=backgroundWhite+1;
+            canvas.drawRect(0f,0f, params?.width?.toFloat() ?: 0f, params?.height?.toFloat() ?: 0f,paint)
         }
 
     }

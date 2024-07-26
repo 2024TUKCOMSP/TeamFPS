@@ -131,6 +131,7 @@ class GallaryFragment : Fragment() {
             val storageRef = FirebaseStorage.getInstance().reference
             //데이터 베이스에 사진 저장 하는 코드
             val fileRef = storageRef.child("images/${System.currentTimeMillis()}.jpg")
+            Log.d("hyun","images/${System.currentTimeMillis()}.jpg")
             //baos로 바이트 배열로 변환
             val baos = ByteArrayOutputStream()
             //JPEG 형태로 압축
