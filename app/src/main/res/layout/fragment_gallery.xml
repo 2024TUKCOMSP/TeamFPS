@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".gallary.GalleryFragment">
+    <LinearLayout
+        android:id ="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/galleryframent_background"
+        android:orientation="horizontal"
+        >
+        <ImageButton
+            android:id="@+id/redColor"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/red_background"/>
+        <ImageButton
+            android:id="@+id/blueColor"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/blue_background"/>
+        <ImageButton
+            android:id="@+id/blackColor"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/black_background"/>
+        <ImageButton
+            android:id="@+id/whiteColor"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/white_background"/>
+
+    </LinearLayout>
+    <RelativeLayout
+        android:background="@drawable/gallery_background"
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/containpaint"
+        android:layout_width="match_parent"
+        android:layout_height="600dp">
+        <RelativeLayout
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:id="@+id/paint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp">
+
+            <include layout="@layout/paint_view" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/containpaint"
+        android:gravity="center"
+        android:background="@drawable/galleryframent_background"
+        >
+        <LinearLayout
+            android:layout_width="350dp"
+            android:gravity="center"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+                <ImageView
+                    android:id="@+id/SelectPath"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/round_white_width5dp"
+                    android:src ="@drawable/pen"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+                <ImageView
+                    android:id="@+id/SelectLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/round_white_width5dp"
+                    android:src ="@drawable/line"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+                <ImageView
+                    android:padding="5dp"
+                    android:id="@+id/SelectCircle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/round_white_width5dp"
+                    android:src ="@drawable/circle"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+                <ImageView
+                    android:padding="5dp"
+                    android:id="@+id/SelectRectangle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/round_white_width5dp"
+                    android:src ="@drawable/rectangle"/>
+            </LinearLayout>
+        </LinearLayout>
+        <ImageView
+            android:id ="@+id/paintendbutton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src = "@drawable/sellpaint" />
+
+    </LinearLayout>
+
+</RelativeLayout>

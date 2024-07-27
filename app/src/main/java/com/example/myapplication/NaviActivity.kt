@@ -1,21 +1,17 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.myapplication.data.Users
 import com.example.myapplication.databinding.ActivityNaviBinding
 import com.example.myapplication.databinding.CustomDialogBinding
-import com.example.myapplication.gallary.GallaryFragment
+import com.example.myapplication.gallary.GalleryFragment
 import com.example.myapplication.home.HomeFragment
-import com.example.myapplication.profile.BuyFragment
-import com.example.myapplication.profile.DrawFragment
 import com.example.myapplication.profile.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
@@ -43,7 +39,7 @@ class NaviActivity : AppCompatActivity() {
         val bottomNavigationView =findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val profileFragment = ProfileFragment()
         val homeFragment = HomeFragment()
-        val gallaryFragment = GallaryFragment()
+        val galleryFragment = GalleryFragment()
         replaceFragment(homeFragment)
         bottomNavigationView.selectedItemId = R.id.home
 
@@ -52,7 +48,7 @@ class NaviActivity : AppCompatActivity() {
             when(item.itemId) {
                 R.id.profile -> replaceFragment(profileFragment)
                 R.id.home -> replaceFragment(homeFragment)
-                R.id.draw-> replaceFragment(gallaryFragment)
+                R.id.draw-> replaceFragment(galleryFragment)
             }
             true
         }

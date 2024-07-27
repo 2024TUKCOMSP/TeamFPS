@@ -1,6 +1,6 @@
 package com.example.myapplication.gallary
 
-import android.content.Intent
+import android.app.ProgressDialog
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -13,8 +13,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.example.myapplication.NaviActivity
 import com.example.myapplication.R
@@ -22,12 +22,19 @@ import com.example.myapplication.data.Paints
 import com.example.myapplication.data.Pid
 import com.example.myapplication.gallary.PaintView.Companion.colorList
 import com.example.myapplication.gallary.PaintView.Companion.currentBrush
+import com.example.myapplication.gallary.PaintView.Companion.currentShape
 import com.example.myapplication.gallary.PaintView.Companion.pathList
+import com.example.myapplication.gallary.PaintView.Companion.shapeList
+import com.example.myapplication.gallary.PaintView.Shape
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -36,17 +43,17 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 
-class GallaryFragment : Fragment() {
+class GalleryFragment : Fragment() {
     private lateinit var paintView : PaintView
-
+    private var isSaving = false
+    private lateinit var progressDialog: ProgressDialog
     companion object{
+
         var path = Path()
         var paintBrush = Paint()
     }
 
 
-
-    // TODO: Rename and change types of parameters
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -56,12 +63,27 @@ class GallaryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val rootView = inflater.inflate(R.layout.fragment_gallary, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_gallery, container, false)
         paintView = rootView.findViewById(R.id.paint_view)
 
-        val paintEndButton: Button =rootView.findViewById(R.id.paintendbutton)
-        paintEndButton.setOnClickListener{
-            viewSave(paintView)
+        val paintEndButton: ImageView =rootView.findViewById(R.id.paintendbutton)
+        paintEndButton.setOnClickListener {
+            //isSaving을 사용하여 두번 버튼이 연속으로 나오지 않도록 처리함
+            if (!isSaving) {
+                //isSaving을 트루로 바꾸고
+                isSaving = true
+                //버튼을 비활성화
+                paintEndButton.isEnabled = false
+                showProgressDialog()
+                //함수를 실행
+                viewSave(paintView) {
+                    //이 컴포넌트를 viewSave에 넣고 함수가 끝날때 실행
+                    isSaving = false
+                    paintEndButton.isEnabled = true
+                    hideProgressDialog()
+                    showCustomDialog()
+                }
+            }
         }
 
         return rootView
@@ -71,12 +93,15 @@ class GallaryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         val redBtn = view.findViewById<ImageButton>(R.id.redColor)
         val blueBtn = view.findViewById<ImageButton>(R.id.blueColor)
         val blackBtn = view.findViewById<ImageButton>(R.id.blackColor)
         val eraser = view.findViewById<ImageButton>(R.id.whiteColor)
+        val pathBtn = view.findViewById<ImageView>(R.id.SelectPath)
+        val lineBtn = view.findViewById<ImageView>(R.id.SelectLine)
+        val circleBtn = view.findViewById<ImageView>(R.id.SelectCircle)
+        val rectBtn = view.findViewById<ImageView>(R.id.SelectRectangle)
+
 
         redBtn.setOnClickListener{
             paintBrush.color = Color.RED
@@ -84,19 +109,51 @@ class GallaryFragment : Fragment() {
         }
         blueBtn.setOnClickListener{
             paintBrush.color = Color.BLUE
+            currentShape= Shape.CIRCLE
             currentColor(paintBrush.color)
         }
         blackBtn.setOnClickListener{
             paintBrush.color = Color.BLACK
+            currentShape= Shape.RECTANGLE
             currentColor(paintBrush.color)
         }
         eraser.setOnClickListener{
             pathList.clear()
             colorList.clear()
             path.reset()
+            shapeList.clear()
+        }
+        pathBtn.setOnClickListener{
+            currentShape =Shape.PATH
+        }
+        lineBtn.setOnClickListener{
+            currentShape =Shape.LINE
+        }
+        circleBtn.setOnClickListener{
+            currentShape =Shape.CIRCLE
+        }
+        rectBtn.setOnClickListener{
+            currentShape =Shape.RECTANGLE
         }
 
     }
+    private fun showProgressDialog() {
+        progressDialog = ProgressDialog(requireContext())
+        progressDialog.setMessage("그림등록중...")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+    }
+
+    private fun hideProgressDialog() {
+        progressDialog.dismiss()
+    }
+
+    private fun showCustomDialog() {
+        val customDialog = SelectDrawingCostName(requireContext())
+        customDialog.show()
+    }
+
+
     private fun getViewBitmap(view: View): Bitmap {
         //뷰의 크기('measuredWidth','measuredHeight')에 맞는 빈 비트맵 이미지를 생성한다. ARGB_8888은 32비트맵을 의미
         val bitmap = Bitmap.createBitmap(
@@ -147,9 +204,6 @@ class GallaryFragment : Fragment() {
                 // 업로드 성공 후 다운로드 URL을 가져옴
                 fileRef.downloadUrl.addOnSuccessListener { uri ->
                     val imageUrl = uri.toString()
-
-                    val customDialog = SelectDrawingCostName(requireContext())
-                    customDialog.show()
                     val token = (requireActivity() as? NaviActivity)?.getToken()
                     val uid = token.hashCode().toString()
 
@@ -178,6 +232,8 @@ class GallaryFragment : Fragment() {
                             }
                             pathList.clear()
                             colorList.clear()
+                            shapeList.clear()
+                            Companion.path.reset()
                         }
 
                         override fun onCancelled(e: DatabaseError) {
@@ -187,10 +243,7 @@ class GallaryFragment : Fragment() {
                     fos.close()
                 }
             }
-
-
-
-
+            
             fos.close()
             Log.d("hyun", "bug 위치 : 비트맵 파일저장 파일닫기")
         }catch (e: IOException) {
@@ -198,15 +251,19 @@ class GallaryFragment : Fragment() {
             e.printStackTrace()
         }
     }
-    private fun viewSave(view: PaintView) {
-        //뷰가 측정된 후에 비트맵을 생성하도록 수정
-        view.post{
-            //뷰를 비트맵 이미지로 변환합니다.
+    private fun viewSave(view: PaintView, onComplete: () -> Unit) {
+        view.post {
             val bitmap = getViewBitmap(view)
-            //저장할 파일 경로와 이름을 생성합니다.
             val filePath = getSaveFilePathName()
-            //비트맵 이미지를 파일로 저장합니다
-            bitmapFileSave(bitmap, filePath)
+            GlobalScope.launch(Dispatchers.IO) {
+                try {
+                    bitmapFileSave(bitmap, filePath)
+                } finally {
+                    withContext(Dispatchers.Main) {
+                        onComplete()
+                    }
+                }
+            }
         }
     }
 
