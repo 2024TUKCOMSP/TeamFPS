@@ -40,17 +40,30 @@
 
     </LinearLayout>
     <RelativeLayout
-        android:id="@+id/paint"
+        android:background="@drawable/gallery_background"
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/containpaint"
         android:layout_width="match_parent"
-        android:layout_height="520dp"
-        android:layout_below="@+id/toolbar">
-        <include layout="@layout/paint_view"/>
+        android:layout_height="520dp">
+        <RelativeLayout
+            android:layout_margin="5dp"
+            android:background="@drawable/round_white"
+            android:gravity="center"
+            android:id="@+id/paint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp">
+
+            <include layout="@layout/paint_view" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/paint"
+        android:layout_below="@+id/containpaint"
         android:gravity="right"
         >
         <Button
