@@ -13,6 +13,7 @@ import com.example.myapplication.databinding.CustomDialogBinding
 import com.example.myapplication.gallary.GalleryFragment
 import com.example.myapplication.home.HomeFragment
 import com.example.myapplication.profile.ProfileFragment
+import com.google.android.gms.auth.api.Auth
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
 import com.google.firebase.database.DataSnapshot
@@ -55,8 +56,7 @@ class NaviActivity : AppCompatActivity() {
 
         //로그인 토큰 받기
         val token = intent.getStringExtra("TOKEN")
-        val Auth = intent.getStringExtra("Auth")
-        // val token = "abcdfe"
+        val auth = intent.getStringExtra("Auth")
 
         //fragment로 uid 데이터 전달
         if (token != null) {
@@ -67,14 +67,14 @@ class NaviActivity : AppCompatActivity() {
         }
 
         //데이터 존재 확인
-        checkUser(token, Auth)
+        checkUser(token, auth)
     }
     fun getToken(): String?{
         return intent.getStringExtra("TOKEN")
     }
 
     //데이터 존재 확인
-    private fun checkUser(token: String?, Auth: String?){
+    private fun checkUser(token: String?, auth: String?){
         if (token== null) return
 
         val database = FirebaseDatabase.getInstance()
@@ -92,10 +92,9 @@ class NaviActivity : AppCompatActivity() {
         usersRef.child(uid).addListenerForSingleValueEvent(object: ValueEventListener {
             //데이터를 성공적으로 읽어본 경우
             override fun onDataChange(snapshot: DataSnapshot) {
-                //Log.d("yang","token2")
                 if(!snapshot.exists()){
                     //DB에 없는 경우 회원가입
-                    showSignUpDialog(uid,Auth)
+                    showSignUpDialog(uid,auth)
                 }
             }
             //데이터 읽기가 실패한 경우
@@ -106,7 +105,7 @@ class NaviActivity : AppCompatActivity() {
     }
 
     //커스텀 다이얼로그 설정
-    private fun showSignUpDialog(uid: String, Auth: String?){
+    private fun showSignUpDialog(uid: String, auth: String?){
         //커스텀 다이얼로그의 뷰바인딩 설정
         val dialogBinding = CustomDialogBinding.inflate(layoutInflater)
         //다이얼로그 설정
@@ -147,7 +146,7 @@ class NaviActivity : AppCompatActivity() {
             val usersRef = database.getReference("users")
             
             //회원정보 클래스 생성
-            val user = Users(uid,name,nickname,null, Auth, "10000")
+            val user = Users(uid,name,nickname,null, auth, "10000")
             //db에 회원정보 저장
             usersRef.child(user.uid!!).setValue(user)
 

@@ -47,8 +47,7 @@ class LoginActivity : AppCompatActivity() {
 
         val oauthLoginCallback = object : OAuthLoginCallback {
             override fun onSuccess() {
-                // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
-                Log.d("naver", "login")
+
                 //로그인 시 토큰을 가지고 navi로 이동
                 moveActivity(NaverIdLoginSDK.getAccessToken(),"Naver")
 //                binding.tvAccessToken.text = NaverIdLoginSDK.getAccessToken()
@@ -77,11 +76,9 @@ class LoginActivity : AppCompatActivity() {
                 if (error != null) {
                     Log.e(TAG, "카카오계정으로 로그인 실패", error)
                 } else if (token != null) {
-                    Log.d("kakao", "login")
                     Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
-                    //로그인 시 토큰을 가지고 navi로 이동
 
-                    //moveActivity(token.accessToken)
+                    //로그인 시 토큰을 가지고 navi로 이동
                     fetchUid()
 
                 }
@@ -103,10 +100,9 @@ class LoginActivity : AppCompatActivity() {
                         // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
                         UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
                     } else if (token != null) {
-                        Log.d("kakao", "login")
                         Log.i(TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
+
                         //로그인 시 토큰을 가지고 navi로 이동
-                        //moveActivity(token.accessToken)
                         fetchUid()
 
                     }
@@ -142,7 +138,6 @@ class LoginActivity : AppCompatActivity() {
             try {
                 val account = task.getResult(ApiException::class.java)!!
                 firebaseAuthWithGoogle(account.idToken!!)
-                Log.d("ggoog", "login")
             } catch (e: ApiException) {
                 // 로그 실패 처리
                 Log.e("ggoog", "Google sign in failed", e)
@@ -155,11 +150,8 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    // 로그인 성공 처리
                     //로그인 시 토큰을 가지고 navi로 이동
                     moveActivity(idToken,"Google")
-                    Log.d("ggoog", "login")
                 } else {
                     // 로그인 실패 처리
                 }

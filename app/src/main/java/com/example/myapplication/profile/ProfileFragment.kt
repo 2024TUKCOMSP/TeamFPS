@@ -58,7 +58,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         binding.viewpager.adapter = PagerAdapter(requireActivity())
@@ -155,8 +155,9 @@ class ProfileFragment : Fragment() {
                         auth.signOut()
                     }
                 }
-                // 로그아웃 시 SharedPreferences에 저장된 로그인 방법 삭제
+                // 로그아웃 시 SharedPreferences에 저장된 로그인 방법 및 로그인 정보 삭제
                 pref.edit().remove("login_method").apply()
+                pref.edit().remove("login_user").apply()
 
                 val intent = Intent(requireActivity(), LoginActivity::class.java)
                 // CLEAR_TOP : 액티비티 스택을 모두 삭제, NEW_TASK: 액티비티 실행 시 새 task에서 액티비티 실행
@@ -190,12 +191,13 @@ class ProfileFragment : Fragment() {
         val positiveBtn = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
         positiveBtn.setOnClickListener{
             val nickname = dialogBinding.setNickname.text.toString()
-            if(imageUri != null && nickname.isNotEmpty()){
+
+            if(imageUri != null || nickname.isNotEmpty()){
                 updateProfile(nickname)
                 alertDialog.dismiss()
             }
             else
-                Toast.makeText(requireContext(), "이미지 혹은 닉네임변경부분이 비어있습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "이미지 혹은 닉네임 변경부분이 비어있습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -224,7 +226,6 @@ class ProfileFragment : Fragment() {
     }
     private fun loadUserInfo() {
         //현재 로그인한 유저 객체
-        //val user = auth.currentUser
         val database = FirebaseDatabase.getInstance()
         val usersRef = database.getReference("users").child(loginUser)
 
