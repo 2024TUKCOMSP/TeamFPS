@@ -1,11 +1,15 @@
 package com.example.myapplication
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.fragment.app.Fragment
 import com.example.myapplication.data.Users
 import com.example.myapplication.databinding.ActivityNaviBinding
@@ -19,6 +23,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
+import java.io.File
+import java.io.FileOutputStream
 
 interface TokenProvider{
     fun getToken(): String?
@@ -139,6 +146,8 @@ class NaviActivity : AppCompatActivity() {
         dialogBinding.setName.addTextChangedListener(textWatcher)
         dialogBinding.setNickname.addTextChangedListener(textWatcher)
 
+        val imgref = FirebaseStorage.getInstance().reference.child("OG.png")
+
         //완료버튼 누를 시 회원가입
         positiveBtn.setOnClickListener {
             val name = dialogBinding.setName.text.toString()
@@ -147,12 +156,39 @@ class NaviActivity : AppCompatActivity() {
             val database = FirebaseDatabase.getInstance()
             val usersRef = database.getReference("users")
 
-            //회원정보 클래스 생성
-            val user = Users(uid,name,nickname,null, auth, "10000")
-            //db에 회원정보 저장
-            usersRef.child(user.uid!!).setValue(user)
+            var imgURL: String? = ""
 
+            val profileRef = FirebaseStorage.getInstance().reference.child("profile_images/$uid")
+
+            val bitmap = BitmapFactory.decodeResource(resources,R.drawable.og)
+            val file = File(cacheDir,"og.png")
+
+            FileOutputStream(file).use { outputStream ->
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            }
+            val uri = Uri.fromFile(file)
+
+            /*imgref.downloadUrl.addOnSuccessListener { uri ->
+                Log.d("yang", "imguri: $uri")*/
+                profileRef.putFile(uri).addOnSuccessListener {
+                    profileRef.downloadUrl.addOnSuccessListener { downloadUri ->
+                        imgURL = downloadUri.toString()
+                        //회원정보 클래스 생성
+                        val user = Users(uid,name,nickname,imgURL, auth, "10000")
+                        //db에 회원정보 저장
+                        usersRef.child(user.uid!!).setValue(user)
+                        Log.d("yang","inUri : $imgURL")
+                    }
+                }.addOnFailureListener{ exception->
+                    Log.e("yang", "profileRef 오류.", exception)
+                }
+            /*}.addOnFailureListener{ exception->
+                Log.e("yang", "imgref오류.", exception)*/
+
+            Log.d("yang","outUri : $imgURL")
             alertDialog.dismiss()
+            //캐시 삭제
+            file.delete()
         }
 
     }
