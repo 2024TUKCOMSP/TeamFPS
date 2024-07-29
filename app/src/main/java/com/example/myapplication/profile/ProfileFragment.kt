@@ -197,7 +197,7 @@ class ProfileFragment : Fragment() {
                 alertDialog.dismiss()
             }
             else
-                Toast.makeText(requireContext(), "이미지 혹은 닉네임 변경부분이 비어있습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "이미지 혹은 닉네임 부분이 비어있습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -210,8 +210,8 @@ class ProfileFragment : Fragment() {
         val usersRef = database.getReference("users").child(loginUser)
 
         //닉네임 변경
-        usersRef.child("nickname").setValue(nickname)
-
+        if(nickname.isNotEmpty())
+            usersRef.child("nickname").setValue(nickname)
 
         imageRef.putFile(imageUri!!).addOnSuccessListener{
             imageRef.downloadUrl.addOnSuccessListener { downloadUri ->
