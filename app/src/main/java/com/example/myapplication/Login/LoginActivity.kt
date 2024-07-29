@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val database = FirebaseDatabase.getInstance()
+        /*val database = FirebaseDatabase.getInstance()
         val usersRef = database.getReference("users")
         //로그인 유저 불러오기
         val pref = getSharedPreferences("userInfo", Context.MODE_PRIVATE)
@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
             override fun onCancelled(e: DatabaseError) {
                 Log.d(TAG, "데이터 호출 실패: $e")
             }
-        })
+        })*/
         
         val keyHash = Utility.getKeyHash(this)
         Log.d("keyHash", keyHash)
