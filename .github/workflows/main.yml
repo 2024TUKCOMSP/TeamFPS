@@ -1,0 +1,37 @@
+name: Android CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository #리포지토리의 코드를 체크아웃합니다.
+      uses: actions/checkout@v2
+
+    - name: Set up JDK #Java 17로 테스트를 진행합니다.
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+
+    - name: Prepare Gradle wrapper #Gradle Wrapper 실행 권한을 부여합니다.
+      run: chmod +x ./gradlew
+
+    - name: Build with Gradle  #./gradlew asembleDebug 명령어를 이용하여 디버그 APK를 빌드합니다.
+      run: ./gradlew assembleDebug
+
+    - name: Upload Debug APK  #빌드된 디버그 APK를 GitHub Actions 아티펙트로 업로드합니다.
+      uses: actions/upload-artifact@v2  #이걸 사용해서
+      with:
+        name: debug-apk
+        path: app/build/outputs/apk/debug/app-debug.apk # 이파일을 아티펙트 형태로 묶음
+
+    - name: Notify success #성공시 성공 메세지를 출력합니다.
+      if: success()
+      run: echo "Build and artifact upload successful!"
