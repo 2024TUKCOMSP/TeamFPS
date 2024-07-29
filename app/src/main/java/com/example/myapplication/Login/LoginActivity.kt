@@ -3,12 +3,14 @@ package com.example.myapplication.Login
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.nfc.Tag
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.myapplication.NaviActivity
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityLoginBinding
@@ -18,6 +20,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
@@ -38,6 +44,30 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val database = FirebaseDatabase.getInstance()
+        val usersRef = database.getReference("users")
+        //로그인 유저 불러오기
+        val pref = getSharedPreferences("userInfo", Context.MODE_PRIVATE)
+        val loginUser = pref.getString("login_user", "null").toString()
+        val loginMethod= pref.getString("login_method","null").toString()
+
+        Log.d("yang","loginUser: $loginUser")
+
+        //데이터 존재 확인을 위해 token(user)의 데이터 스냅샷을 한번 읽어오는 함수
+        usersRef.child(loginUser).addListenerForSingleValueEvent(object: ValueEventListener {
+            //데이터를 성공적으로 읽어본 경우 바로 홈 으로 이동
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    Log.d("yang","loginUser2: $loginUser")
+                    moveActivity(loginUser,loginMethod,1)
+                }
+            }
+            //데이터 읽기가 실패한 경우
+            override fun onCancelled(e: DatabaseError) {
+                Log.d(TAG, "데이터 호출 실패: $e")
+            }
+        })
+        
         val keyHash = Utility.getKeyHash(this)
         Log.d("keyHash", keyHash)
 
@@ -49,7 +79,7 @@ class LoginActivity : AppCompatActivity() {
             override fun onSuccess() {
 
                 //로그인 시 토큰을 가지고 navi로 이동
-                moveActivity(NaverIdLoginSDK.getAccessToken(),"Naver")
+                moveActivity(NaverIdLoginSDK.getAccessToken(),"Naver",0)
 //                binding.tvAccessToken.text = NaverIdLoginSDK.getAccessToken()
 //                binding.tvRefreshToken.text = NaverIdLoginSDK.getRefreshToken()
 //                binding.tvExpires.text = NaverIdLoginSDK.getExpiresAt().toString()
@@ -151,7 +181,7 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     //로그인 시 토큰을 가지고 navi로 이동
-                    moveActivity(idToken,"Google")
+                    moveActivity(idToken,"Google",0)
                 } else {
                     // 로그인 실패 처리
                 }
@@ -159,7 +189,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //토큰을 넘긴 채 Navi로 이동
-    private fun moveActivity(token: String?, auth: String) {
+    private fun moveActivity(token: String?, auth: String, flag: Int) {
         //로그인 방법을 SharedPreferences에 저장
         //SharedPreference: 간단한 저장을 위한 안드로이드 API
         val pref = getSharedPreferences("userInfo", MODE_PRIVATE)
@@ -168,6 +198,8 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, NaviActivity::class.java)
         intent.putExtra("TOKEN",token)
         intent.putExtra("Auth", auth)
+        //0이면 소셜 로그인, 1이면 로그인 전적 있음
+        intent.putExtra("flag", flag)
         startActivity(intent)
         finish()
     }
@@ -176,10 +208,10 @@ class LoginActivity : AppCompatActivity() {
     private fun fetchUid() {
         UserApiClient.instance.me { user, error ->
             if (error != null) {
-                Log.e("yang", "사용자 정보 요청 실패", error)
+                Log.e(TAG, "사용자 정보 요청 실패", error)
             } else if (user != null) {
                 val userId = user.id
-                moveActivity(userId.toString(), "Kakao")
+                moveActivity(userId.toString(), "Kakao",0)
             }
         }
     }

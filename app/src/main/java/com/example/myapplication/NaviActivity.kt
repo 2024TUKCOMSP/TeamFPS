@@ -13,7 +13,6 @@ import com.example.myapplication.databinding.CustomDialogBinding
 import com.example.myapplication.gallary.GalleryFragment
 import com.example.myapplication.home.HomeFragment
 import com.example.myapplication.profile.ProfileFragment
-import com.google.android.gms.auth.api.Auth
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
 import com.google.firebase.database.DataSnapshot
@@ -57,32 +56,35 @@ class NaviActivity : AppCompatActivity() {
         //로그인 토큰 받기
         val token = intent.getStringExtra("TOKEN")
         val auth = intent.getStringExtra("Auth")
+        val checkFlag = intent.getIntExtra("flag",111)
 
         //fragment로 uid 데이터 전달
         if (token != null) {
-            val uid = getUidFromToken(token)
+            val uid: String = if(checkFlag==0) {
+                getUidFromToken(token)
+            } else token
             val bundle = Bundle()
             bundle.putString("UID", uid)
             homeFragment.arguments = bundle
         }
 
         //데이터 존재 확인
-        checkUser(token, auth)
+        checkUser(token, auth, checkFlag)
     }
     fun getToken(): String?{
         return intent.getStringExtra("TOKEN")
     }
 
     //데이터 존재 확인
-    private fun checkUser(token: String?, auth: String?){
+    private fun checkUser(token: String?, auth: String?, checkFlag: Int){
         if (token== null) return
 
         val database = FirebaseDatabase.getInstance()
         val usersRef = database.getReference("users")
-        Log.d("yang","token1")
-
         //token을 해쉬 값으로 변환
-        val uid = getUidFromToken(token)
+        val uid: String = if(checkFlag==0) {
+            getUidFromToken(token)
+        } else token
 
         //token을 sharedPreference에 저장
         val pref = getSharedPreferences("userInfo", MODE_PRIVATE)
@@ -144,7 +146,7 @@ class NaviActivity : AppCompatActivity() {
 
             val database = FirebaseDatabase.getInstance()
             val usersRef = database.getReference("users")
-            
+
             //회원정보 클래스 생성
             val user = Users(uid,name,nickname,null, auth, "10000")
             //db에 회원정보 저장
