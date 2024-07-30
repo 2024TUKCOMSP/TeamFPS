@@ -1,5 +1,6 @@
 package com.example.myapplication.profile
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -29,8 +30,10 @@ class BuyFragment : Fragment() {
         paintRef = FirebaseDatabase.getInstance().getReference("paints")
         paintList = mutableListOf<Paints>()
 
-        val token = (requireActivity() as? NaviActivity)?.getToken()
-        val uid = token.hashCode().toString()
+
+        //로그인 유저 불러오기
+        val pref = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE)
+        val uid = pref.getString("login_user", "").toString()
         Log.d("ykyk", "uid: $uid")
 
         fetchData(uid)

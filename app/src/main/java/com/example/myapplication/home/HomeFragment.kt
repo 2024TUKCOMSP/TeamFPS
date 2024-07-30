@@ -64,6 +64,11 @@ class HomeFragment : Fragment() {
                     val user = snapshot.getValue(Users::class.java)
                     binding.nameText.text = user?.nickname
                     binding.moneyText.text = user?.money
+                    if (user?.profilePictureUrl!=null && isAdded) {
+                        Glide.with(this@HomeFragment)
+                            .load(user.profilePictureUrl)
+                            .into(binding.profileImage)
+                    }
                 }
             }
             override fun onCancelled(error: DatabaseError) {
