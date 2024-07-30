@@ -12,12 +12,14 @@
         android:layout_height="wrap_content"
         android:text="이름"
         android:gravity="center"
+        android:layout_marginTop="20dp"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
         android:id="@+id/setName"
+        android:layout_marginHorizontal="50dp"
         />
 
     <TextView
@@ -25,12 +27,14 @@
         android:layout_height="wrap_content"
         android:text="닉네임 설정"
         android:gravity="center"
+        android:layout_marginTop="20dp"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
         android:id="@+id/setNickname"
+        android:layout_marginHorizontal="50dp"
         />
 
 </LinearLayout>

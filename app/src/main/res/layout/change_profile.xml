@@ -12,34 +12,37 @@
         android:layout_height="wrap_content"
         android:text="닉네임 설정"
         android:gravity="center"
+        android:layout_marginTop="20dp"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
         android:id="@+id/setNickname"
+        android:layout_marginHorizontal="50dp"
         />
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="프로필 사진"
         android:gravity="center"
+        android:layout_marginTop="30dp"
         />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="갤러리에서 가져오기"
         android:id="@+id/imageToGallery"
+        android:layout_marginVertical="15dp"
         />
     <ImageView
         android:id="@+id/profileImage"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_gravity="center"
         android:scaleType="centerCrop"
         android:layout_marginBottom="16dp"
+        android:padding="2dp"
+        android:background="@drawable/border"
         />
-
-
 </LinearLayout>
