@@ -3,12 +3,14 @@ package com.example.myapplication.Login
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.nfc.Tag
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.myapplication.NaviActivity
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityLoginBinding
@@ -18,6 +20,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
@@ -37,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        
         val keyHash = Utility.getKeyHash(this)
         Log.d("keyHash", keyHash)
 
@@ -47,15 +53,8 @@ class LoginActivity : AppCompatActivity() {
 
         val oauthLoginCallback = object : OAuthLoginCallback {
             override fun onSuccess() {
-                // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
-                Log.d("naver", "login")
                 //로그인 시 토큰을 가지고 navi로 이동
-                moveActivity(NaverIdLoginSDK.getAccessToken(),"Naver")
-//                binding.tvAccessToken.text = NaverIdLoginSDK.getAccessToken()
-//                binding.tvRefreshToken.text = NaverIdLoginSDK.getRefreshToken()
-//                binding.tvExpires.text = NaverIdLoginSDK.getExpiresAt().toString()
-//                binding.tvType.text = NaverIdLoginSDK.getTokenType()
-//                binding.tvState.text = NaverIdLoginSDK.getState().toString()
+                moveActivity(NaverIdLoginSDK.getAccessToken(),"Naver",0)
             }
             override fun onFailure(httpStatus: Int, message: String) {
                 val errorCode = NaverIdLoginSDK.getLastErrorCode().code
@@ -77,11 +76,9 @@ class LoginActivity : AppCompatActivity() {
                 if (error != null) {
                     Log.e(TAG, "카카오계정으로 로그인 실패", error)
                 } else if (token != null) {
-                    Log.d("kakao", "login")
                     Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
-                    //로그인 시 토큰을 가지고 navi로 이동
 
-                    //moveActivity(token.accessToken)
+                    //로그인 시 토큰을 가지고 navi로 이동
                     fetchUid()
 
                 }
@@ -103,10 +100,9 @@ class LoginActivity : AppCompatActivity() {
                         // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
                         UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
                     } else if (token != null) {
-                        Log.d("kakao", "login")
                         Log.i(TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
+
                         //로그인 시 토큰을 가지고 navi로 이동
-                        //moveActivity(token.accessToken)
                         fetchUid()
 
                     }
@@ -142,7 +138,6 @@ class LoginActivity : AppCompatActivity() {
             try {
                 val account = task.getResult(ApiException::class.java)!!
                 firebaseAuthWithGoogle(account.idToken!!)
-                Log.d("ggoog", "login")
             } catch (e: ApiException) {
                 // 로그 실패 처리
                 Log.e("ggoog", "Google sign in failed", e)
@@ -155,11 +150,8 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    // 로그인 성공 처리
                     //로그인 시 토큰을 가지고 navi로 이동
-                    moveActivity(idToken,"Google")
-                    Log.d("ggoog", "login")
+                    moveActivity(idToken,"Google",0)
                 } else {
                     // 로그인 실패 처리
                 }
@@ -167,7 +159,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //토큰을 넘긴 채 Navi로 이동
-    private fun moveActivity(token: String?, auth: String) {
+    private fun moveActivity(token: String?, auth: String, flag: Int) {
         //로그인 방법을 SharedPreferences에 저장
         //SharedPreference: 간단한 저장을 위한 안드로이드 API
         val pref = getSharedPreferences("userInfo", MODE_PRIVATE)
@@ -176,6 +168,8 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, NaviActivity::class.java)
         intent.putExtra("TOKEN",token)
         intent.putExtra("Auth", auth)
+        //0이면 소셜 로그인, 1이면 로그인 전적 있음
+        intent.putExtra("flag", flag)
         startActivity(intent)
         finish()
     }
@@ -184,10 +178,10 @@ class LoginActivity : AppCompatActivity() {
     private fun fetchUid() {
         UserApiClient.instance.me { user, error ->
             if (error != null) {
-                Log.e("yang", "사용자 정보 요청 실패", error)
+                Log.e(TAG, "사용자 정보 요청 실패", error)
             } else if (user != null) {
                 val userId = user.id
-                moveActivity(userId.toString(), "Kakao")
+                moveActivity(userId.toString(), "Kakao",0)
             }
         }
     }

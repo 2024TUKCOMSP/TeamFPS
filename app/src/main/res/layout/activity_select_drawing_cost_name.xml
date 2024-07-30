@@ -35,22 +35,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:gravity="right"
         android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/noButton"
-            android:layout_width="0dp"
-            android:background="@drawable/round_white"
-            android:layout_height="40dp"
-            android:layout_marginEnd="7dp"
-            android:layout_weight="1"
-            android:text="취소"
-            android:textSize="14sp" />
-
         <Button
             android:id="@+id/yesButton"
             android:background="@drawable/round_white"
-            android:layout_width="0dp"
+            android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:text="확인"

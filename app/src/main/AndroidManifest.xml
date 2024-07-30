@@ -3,15 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools" >
     <!-- 인터넷 사용 권한 설정 -->
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:name=".GlobalApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/og"
+        android:icon="@drawable/nog5000"
         android:label="Online Gallery"
-        android:roundIcon="@drawable/og"
+        android:roundIcon="@drawable/nog5000"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31" >
