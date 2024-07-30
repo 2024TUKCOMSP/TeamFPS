@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#EDE7E3">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -12,7 +12,8 @@
         android:theme="?attr/actionBarTheme"
         app:menu="@menu/menu_profile"
         app:title="마이페이지"
-        android:id="@+id/myPageToolbar"/>
+        android:id="@+id/myPageToolbar"
+        android:background="#EDE7E3"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,6 +26,7 @@
             android:id="@+id/profile_img"
             android:scaleType="fitXY"
             android:padding="2dp"
+            android:src="@drawable/og"
             android:background="@drawable/border"/>
         <TextView
             android:layout_width="wrap_content"
@@ -36,7 +38,8 @@
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tabs"/>
+        android:id="@+id/tabs"
+        android:background="@drawable/border_bottom"/>
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
         android:layout_height="match_parent"

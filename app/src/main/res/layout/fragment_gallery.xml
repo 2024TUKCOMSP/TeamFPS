@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".gallary.GalleryFragment">
+    tools:context=".gallary.GalleryFragment"
+    android:orientation="vertical">
     <LinearLayout
         android:id ="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:background="@drawable/galleryframent_background"
+        android:background="@color/light_brown"
         android:orientation="horizontal"
         >
         <ImageButton
@@ -39,12 +40,12 @@
             android:background="@drawable/white_background"/>
 
     </LinearLayout>
-    <RelativeLayout
+    <LinearLayout
         android:background="@drawable/gallery_background"
-        android:layout_below="@+id/toolbar"
         android:id="@+id/containpaint"
         android:layout_width="match_parent"
-        android:layout_height="600dp">
+        android:layout_height="0dp"
+        android:layout_weight="1">
         <RelativeLayout
             android:layout_margin="5dp"
             android:gravity="center"
@@ -57,14 +58,12 @@
 
         </RelativeLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/containpaint"
+        android:layout_height="70dp"
         android:gravity="center"
-        android:background="@drawable/galleryframent_background"
-        >
+        android:background="@color/light_brown">
         <LinearLayout
             android:layout_width="350dp"
             android:gravity="center"
@@ -121,7 +120,5 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src = "@drawable/sellpaint" />
-
     </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".home.HomeFragment">
+    tools:context=".home.HomeFragment"
+    android:background="#EDE7E3">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,6 +51,11 @@
                 android:layout_marginTop="5dp"/>
         </LinearLayout>
     </LinearLayout>
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="80dp"-->
+<!--        android:src="@drawable/light3"-->
+<!--        android:scaleType="fitXY"/>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
