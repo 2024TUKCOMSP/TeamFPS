@@ -14,11 +14,14 @@ jobs:
     - name: Checkout repository #리포지토리의 코드를 체크아웃합니다.
       uses: actions/checkout@v2
 
-    - name: Set up JDK #Java 17로 테스트를 진행합니다.
-      uses: actions/setup-java@v2
+    - name: set up JDK 17
+      uses: actions/setup-java@v3
       with:
-        distribution: 'zulu'
         java-version: '17'
+        # JDK 배포판
+        distribution: 'temurin'
+        # gradle 캐싱 활성화
+        cache: gradle
 
     - name: Prepare Gradle wrapper #Gradle Wrapper 실행 권한을 부여합니다.
       run: chmod +x ./gradlew
