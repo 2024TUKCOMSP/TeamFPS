@@ -45,6 +45,7 @@ class SelectDrawingCostName(context: Context) : AlertDialog(context){
         //주변투명화
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog?.setCancelable(false)    //다이얼로그 외부 클릭 시 종료 방지
         //yes버튼 기능
         dialogBinding.yesButton.isEnabled = false
         val costE = dialogBinding.picturecost.text
