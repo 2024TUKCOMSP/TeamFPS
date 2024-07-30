@@ -1,6 +1,7 @@
 package com.example.myapplication.gallary
 
 import android.app.ProgressDialog
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -204,8 +205,10 @@ class GalleryFragment : Fragment() {
                 // 업로드 성공 후 다운로드 URL을 가져옴
                 fileRef.downloadUrl.addOnSuccessListener { uri ->
                     val imageUrl = uri.toString()
-                    val token = (requireActivity() as? NaviActivity)?.getToken()
-                    val uid = token.hashCode().toString()
+                    val pref = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE)
+                    val uid = pref.getString("login_user", "").toString()
+//                    val token = (requireActivity() as? NaviActivity)?.getToken()
+//                    val uid = token.hashCode().toString()
 
                     val database = FirebaseDatabase.getInstance()
                     val paintsRef = database.getReference("paints")
