@@ -102,6 +102,7 @@ class SelectDrawingCostName(context: Context) : AlertDialog(context){
 
         dialog?.show()
         // 확인 버튼 클릭 시 처리할 로직을 여기에 추가
+        dialog?.setCancelable(false)
 
     }
 }

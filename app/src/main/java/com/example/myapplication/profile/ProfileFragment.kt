@@ -212,16 +212,18 @@ class ProfileFragment : Fragment() {
         if(nickname.isNotEmpty())
             usersRef.child("nickname").setValue(nickname)
 
-        imageRef.putFile(imageUri!!).addOnSuccessListener{
-            imageRef.downloadUrl.addOnSuccessListener { downloadUri ->
-                usersRef.child("profilePictureUrl").setValue(downloadUri.toString())
+        if (imageUri != null) {
+            imageRef.putFile(imageUri!!).addOnSuccessListener{
+                imageRef.downloadUrl.addOnSuccessListener { downloadUri ->
+                    usersRef.child("profilePictureUrl").setValue(downloadUri.toString())
+                }
             }
-            }
-            .addOnFailureListener{exception ->
-                Log.e("yang", "이미지 업로드 실패", exception)
-                Toast.makeText(requireContext(), "이미지 업로드 실패", Toast.LENGTH_SHORT).show()
+                .addOnFailureListener{exception ->
+                    Log.e("yang", "이미지 업로드 실패", exception)
+                    Toast.makeText(requireContext(), "이미지 업로드 실패", Toast.LENGTH_SHORT).show()
 
-            }
+                }
+        }
     }
     private fun loadUserInfo() {
         //현재 로그인한 유저 객체
