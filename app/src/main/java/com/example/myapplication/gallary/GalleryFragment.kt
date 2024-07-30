@@ -149,6 +149,7 @@ class GalleryFragment : Fragment() {
 
     private fun showCustomDialog() {
         val customDialog = SelectDrawingCostName(requireContext())
+        customDialog.setCancelable(false)    //다이얼로그 외부 클릭 시 종료 방지
         customDialog.show()
     }
 

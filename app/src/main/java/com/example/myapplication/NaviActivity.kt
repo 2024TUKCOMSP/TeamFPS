@@ -146,8 +146,6 @@ class NaviActivity : AppCompatActivity() {
         dialogBinding.setName.addTextChangedListener(textWatcher)
         dialogBinding.setNickname.addTextChangedListener(textWatcher)
 
-        val imgref = FirebaseStorage.getInstance().reference.child("OG.png")
-
         //완료버튼 누를 시 회원가입
         positiveBtn.setOnClickListener {
             val name = dialogBinding.setName.text.toString()

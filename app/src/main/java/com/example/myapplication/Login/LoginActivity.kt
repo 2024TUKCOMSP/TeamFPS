@@ -43,30 +43,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        /*val database = FirebaseDatabase.getInstance()
-        val usersRef = database.getReference("users")
-        //로그인 유저 불러오기
-        val pref = getSharedPreferences("userInfo", Context.MODE_PRIVATE)
-        val loginUser = pref.getString("login_user", "null").toString()
-        val loginMethod= pref.getString("login_method","null").toString()
-
-        Log.d("yang","loginUser: $loginUser")
-
-        //데이터 존재 확인을 위해 token(user)의 데이터 스냅샷을 한번 읽어오는 함수
-        usersRef.child(loginUser).addListenerForSingleValueEvent(object: ValueEventListener {
-            //데이터를 성공적으로 읽어본 경우 바로 홈 으로 이동
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()){
-                    Log.d("yang","loginUser2: $loginUser")
-                    moveActivity(loginUser,loginMethod,1)
-                }
-            }
-            //데이터 읽기가 실패한 경우
-            override fun onCancelled(e: DatabaseError) {
-                Log.d(TAG, "데이터 호출 실패: $e")
-            }
-        })*/
         
         val keyHash = Utility.getKeyHash(this)
         Log.d("keyHash", keyHash)
@@ -77,14 +53,8 @@ class LoginActivity : AppCompatActivity() {
 
         val oauthLoginCallback = object : OAuthLoginCallback {
             override fun onSuccess() {
-
                 //로그인 시 토큰을 가지고 navi로 이동
                 moveActivity(NaverIdLoginSDK.getAccessToken(),"Naver",0)
-//                binding.tvAccessToken.text = NaverIdLoginSDK.getAccessToken()
-//                binding.tvRefreshToken.text = NaverIdLoginSDK.getRefreshToken()
-//                binding.tvExpires.text = NaverIdLoginSDK.getExpiresAt().toString()
-//                binding.tvType.text = NaverIdLoginSDK.getTokenType()
-//                binding.tvState.text = NaverIdLoginSDK.getState().toString()
             }
             override fun onFailure(httpStatus: Int, message: String) {
                 val errorCode = NaverIdLoginSDK.getLastErrorCode().code
