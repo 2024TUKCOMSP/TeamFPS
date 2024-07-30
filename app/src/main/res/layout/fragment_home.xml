@@ -20,6 +20,7 @@
             android:id="@+id/profile_image"
             android:src="@drawable/onlinegallery"
             android:background="@drawable/border"
+            android:padding="2dp"
             android:scaleType="fitXY"/>
 
         <TextView
