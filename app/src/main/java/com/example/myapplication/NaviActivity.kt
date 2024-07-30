@@ -168,27 +168,23 @@ class NaviActivity : AppCompatActivity() {
             }
             val uri = Uri.fromFile(file)
 
-            /*imgref.downloadUrl.addOnSuccessListener { uri ->
-                Log.d("yang", "imguri: $uri")*/
-                profileRef.putFile(uri).addOnSuccessListener {
-                    profileRef.downloadUrl.addOnSuccessListener { downloadUri ->
-                        imgURL = downloadUri.toString()
+            profileRef.putFile(uri).addOnSuccessListener {
+                profileRef.downloadUrl.addOnSuccessListener { downloadUri ->
+                    imgURL = downloadUri.toString()
                         //회원정보 클래스 생성
-                        val user = Users(uid,name,nickname,imgURL, auth, "10000")
+                    val user = Users(uid,name,nickname,imgURL, auth, "10000")
                         //db에 회원정보 저장
-                        usersRef.child(user.uid!!).setValue(user)
-                        Log.d("yang","inUri : $imgURL")
-                    }
-                }.addOnFailureListener{ exception->
-                    Log.e("yang", "profileRef 오류.", exception)
+                    usersRef.child(user.uid!!).setValue(user)
                 }
-            /*}.addOnFailureListener{ exception->
-                Log.e("yang", "imgref오류.", exception)*/
+            }.addOnFailureListener{ exception->
+                Log.e("yang", "profileRef 오류.", exception)
+            }
 
-            Log.d("yang","outUri : $imgURL")
-            alertDialog.dismiss()
             //캐시 삭제
             file.delete()
+            alertDialog.dismiss()
+
+
         }
 
     }

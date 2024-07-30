@@ -33,9 +33,6 @@ class DrawFragment : Fragment() {
         paintRef = FirebaseDatabase.getInstance().getReference("paints")
         paintList = mutableListOf<Paints>()
 
-        /*val token = (requireActivity() as? NaviActivity)?.getToken()
-        val uid = token.hashCode().toString()*/
-        //val uid = arguments?.getString("UID")
 
         //로그인 유저 불러오기
         val pref = requireContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE)
