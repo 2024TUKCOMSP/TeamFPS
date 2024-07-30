@@ -110,12 +110,10 @@ class GalleryFragment : Fragment() {
         }
         blueBtn.setOnClickListener{
             paintBrush.color = Color.BLUE
-            currentShape= Shape.CIRCLE
             currentColor(paintBrush.color)
         }
         blackBtn.setOnClickListener{
             paintBrush.color = Color.BLACK
-            currentShape= Shape.RECTANGLE
             currentColor(paintBrush.color)
         }
         eraser.setOnClickListener{
