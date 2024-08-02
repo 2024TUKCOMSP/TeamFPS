@@ -43,24 +43,20 @@
 
  **로그인창** | **닉네임다이얼로그** | **닉네임다이얼로그설정** 
  :-------------------: | :--------------------: | :--------------------: 
-<img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo0.jpg" alt="로그인창" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo1.jpg" alt="닉네임다이얼로그" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo01.jpg" alt="닉네임다이얼로그" width="300"/>
+<img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo1.jpg" alt="로그인창" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo2.jpg" alt="닉네임다이얼로그" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo3.jpg" alt="닉네임다이얼로그" width="300"/>
 ***
- **홈화면** | **GalleryFragment화면** | **그림저장다이얼로그** 
+ **그림그리기** | **그림저장다이얼로그** | **그림저장화면** 
  :-------------------: | :--------------------: | :--------------------: 
-<img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo2.jpg" alt="홈화면" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo3.jpg" alt="GallaryFragment화면" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo4.jpg" alt="그림 저장" width="300"/>
+<img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo4.jpg" alt="홈화면" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo5.jpg" alt="GallaryFragment화면" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo6.jpg" alt="그림 저장" width="300"/>
 ***
- **자신의 그림** | **자신이 구입한 그림** | **메뉴버튼** 
+ **프로플 변경 메뉴바** | **프로필 변경** | **사진 클릭후** 
  :-------------------: | :--------------------: | :--------------------: 
-<img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo5.jpg" alt="자신의 화백" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo6.jpg" alt="산 그림" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo7.jpg" alt="메뉴버튼" width="300"/>
+<img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo7.jpg" alt="자신의 화백" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo8.jpg" alt="산 그림" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo9.jpg" alt="메뉴버튼" width="300"/>
 ***
- **프로필 편집화면** | **사진선택** | **자신의갤러리** 
+ **변경된 화면** | **남들이 그린 그림 구매** | **구매 후 적용** 
  :-------------------: | :--------------------: | :--------------------: 
-<img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo9.jpg" alt="프로필편집" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo10.jpg" alt="사진선택" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo11.jpg" alt="자신의갤러리" width="300"/>
+<img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo10.jpg" alt="프로필편집" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo11.jpg" alt="사진선택" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo12.jpg" alt="자신의갤러리" width="300"/>
 ***
- **사진적용** | **사진 및 닉네임 적용후** 
- :-------------------: | :--------------------: 
-<img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo12.jpg" alt="사진적용" width="300"/> | <img src="https://github.com/2024TUKCOMSP/TeamFPS/blob/main/app/src/main/res/drawable/demo13.jpg" alt="사진및 닉네임 적용후" width="300"/>
-
 
 
 
