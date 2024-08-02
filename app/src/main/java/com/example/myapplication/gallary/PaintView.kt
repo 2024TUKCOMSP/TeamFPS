@@ -24,12 +24,16 @@ class PaintView : View {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         init()
     }
+
+
     //기능 추가를 위한 enum class 각각 PATH, LINE, RECTANGLE, CIRCLE
     enum class Shape {
         PATH, LINE, RECTANGLE, CIRCLE
     }
 
     var params : ViewGroup.LayoutParams? = null
+
+
     companion object{
         //pathList안에는 사용자가 그린 path를 저장할 예정
         var pathList = ArrayList<Path>()
@@ -55,7 +59,7 @@ class PaintView : View {
         paintBrush.strokeJoin = Paint.Join.ROUND
         //선의 너비를 8픽셀로 설정합니다.
         paintBrush.strokeWidth = 8f
-
+        //view 초기화
         params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
     private var startX = 0f
@@ -74,6 +78,7 @@ class PaintView : View {
                 startY =y
                 //path에 moveTo로 받아오고 추가 ++currntShape가 PATH라면
                 if (currentShape == Shape.PATH) {
+                    //첫 터치시
                     path.moveTo(x, y)
                 }
                 return true
